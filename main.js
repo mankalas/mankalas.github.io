@@ -2314,6 +2314,43 @@ function _Platform_mergeExportsDebug(moduleName, obj, exports)
 
 
 
+var _Bitwise_and = F2(function(a, b)
+{
+	return a & b;
+});
+
+var _Bitwise_or = F2(function(a, b)
+{
+	return a | b;
+});
+
+var _Bitwise_xor = F2(function(a, b)
+{
+	return a ^ b;
+});
+
+function _Bitwise_complement(a)
+{
+	return ~a;
+};
+
+var _Bitwise_shiftLeftBy = F2(function(offset, a)
+{
+	return a << offset;
+});
+
+var _Bitwise_shiftRightBy = F2(function(offset, a)
+{
+	return a >> offset;
+});
+
+var _Bitwise_shiftRightZfBy = F2(function(offset, a)
+{
+	return a >>> offset;
+});
+
+
+
 
 // HELPERS
 
@@ -3872,43 +3909,6 @@ function _VirtualDom_dekey(keyedNode)
 
 
 
-var _Bitwise_and = F2(function(a, b)
-{
-	return a & b;
-});
-
-var _Bitwise_or = F2(function(a, b)
-{
-	return a | b;
-});
-
-var _Bitwise_xor = F2(function(a, b)
-{
-	return a ^ b;
-});
-
-function _Bitwise_complement(a)
-{
-	return ~a;
-};
-
-var _Bitwise_shiftLeftBy = F2(function(offset, a)
-{
-	return a << offset;
-});
-
-var _Bitwise_shiftRightBy = F2(function(offset, a)
-{
-	return a >> offset;
-});
-
-var _Bitwise_shiftRightZfBy = F2(function(offset, a)
-{
-	return a >>> offset;
-});
-
-
-
 
 // ELEMENT
 
@@ -4351,10 +4351,15 @@ var author$project$Loan$Model = F3(
 	function (term, interest_rate, amount) {
 		return {amount: amount, interest_rate: interest_rate, term: term};
 	});
-var author$project$Main$Field = F3(
-	function (name, value, error) {
-		return {error: error, name: name, value: value};
-	});
+var author$project$Main$BuyerBond = {$: 'BuyerBond'};
+var author$project$Main$BuyerDeposit = {$: 'BuyerDeposit'};
+var author$project$Main$ContractTerm = {$: 'ContractTerm'};
+var author$project$Main$HouseExtras = {$: 'HouseExtras'};
+var author$project$Main$HouseRate = {$: 'HouseRate'};
+var author$project$Main$HouseValue = {$: 'HouseValue'};
+var author$project$Main$Insurance = {$: 'Insurance'};
+var author$project$Main$LoanRate = {$: 'LoanRate'};
+var author$project$Main$LoanTerm = {$: 'LoanTerm'};
 var author$project$Main$Model = function (f_hv) {
 	return function (c_hv) {
 		return function (f_hr) {
@@ -4368,15 +4373,23 @@ var author$project$Main$Model = function (f_hv) {
 										return function (c_pay) {
 											return function (f_ct) {
 												return function (c_ct) {
-													return function (f_cd) {
-														return function (c_cd) {
-															return function (f_tax) {
-																return function (c_tax) {
-																	return function (f_insur) {
-																		return function (c_insur) {
-																			return function (f_twd) {
-																				return function (c_twd) {
-																					return {c_cd: c_cd, c_ct: c_ct, c_he: c_he, c_hr: c_hr, c_hv: c_hv, c_insur: c_insur, c_pay: c_pay, c_tax: c_tax, c_twd: c_twd, f_cd: f_cd, f_ct: f_ct, f_he: f_he, f_hr: f_hr, f_hv: f_hv, f_insur: f_insur, f_lr: f_lr, f_lt: f_lt, f_pay: f_pay, f_tax: f_tax, f_twd: f_twd, loan: loan};
+													return function (f_se) {
+														return function (c_se) {
+															return function (f_sm) {
+																return function (c_sm) {
+																	return function (f_rates) {
+																		return function (c_rates) {
+																			return function (f_insur) {
+																				return function (c_insur) {
+																					return function (f_twd) {
+																						return function (c_twd) {
+																							return function (f_tb) {
+																								return function (c_tb) {
+																									return {c_ct: c_ct, c_he: c_he, c_hr: c_hr, c_hv: c_hv, c_insur: c_insur, c_pay: c_pay, c_rates: c_rates, c_se: c_se, c_sm: c_sm, c_tb: c_tb, c_twd: c_twd, f_ct: f_ct, f_he: f_he, f_hr: f_hr, f_hv: f_hv, f_insur: f_insur, f_lr: f_lr, f_lt: f_lt, f_pay: f_pay, f_rates: f_rates, f_se: f_se, f_sm: f_sm, f_tb: f_tb, f_twd: f_twd, loan: loan};
+																								};
+																							};
+																						};
+																					};
 																				};
 																			};
 																		};
@@ -4398,6 +4411,48 @@ var author$project$Main$Model = function (f_hv) {
 		};
 	};
 };
+var author$project$Main$Payment = {$: 'Payment'};
+var author$project$Main$Rates = {$: 'Rates'};
+var author$project$Main$SellerEquity = {$: 'SellerEquity'};
+var author$project$Main$SellerMortgage = {$: 'SellerMortgage'};
+var author$project$Main$buyerBondHelpText = 'Weekly amount of money the Buyer gives to the Seller. This money is to be given back once the Buyer buys the house to the Seller.';
+var author$project$Main$buyerDepositHelpText = 'Weekly amount of money the Buyer intends on saving in order to build a deposit at the end of the contract.';
+var author$project$Main$contractTermHelpText = 'Number of years after which the Buyer will buy the house to the Seller for the agreed price. This duration can be amended if the Buyer encouters financial difficulties.';
+var author$project$Main$houseExtrasHelpText = 'Possible extra amount of money required to improved the house once bought. This amount won\'t be taken into account when calculating the house value evolution according to market rate.';
+var author$project$Main$houseRateHelpText = 'Expected Housing Market evolution.';
+var author$project$Main$houseValueHelpText = 'The value the house is currently worth. That\n    is the amount mentionned in the contract between the Seller and\n    the Buyer, ie. after x years, the Buyer is going to buy the house\n    from the Seller for that value.';
+var author$project$Main$Field = F6(
+	function (fieldType, name, value, error, popoverState, popoverText) {
+		return {error: error, fieldType: fieldType, name: name, popoverState: popoverState, popoverText: popoverText, value: value};
+	});
+var elm$core$Maybe$Nothing = {$: 'Nothing'};
+var elm$core$Basics$False = {$: 'False'};
+var elm$core$Basics$identity = function (x) {
+	return x;
+};
+var rundis$elm_bootstrap$Bootstrap$Popover$State = function (a) {
+	return {$: 'State', a: a};
+};
+var rundis$elm_bootstrap$Bootstrap$Popover$initialState = rundis$elm_bootstrap$Bootstrap$Popover$State(
+	{
+		domState: {
+			offsetHeight: 0,
+			offsetWidth: 0,
+			rect: {height: 0, left: 0, top: 0, width: 0}
+		},
+		isActive: false
+	});
+var author$project$Main$initField = F4(
+	function (fieldType, label, value, helpText) {
+		return A6(author$project$Main$Field, fieldType, label, value, elm$core$Maybe$Nothing, rundis$elm_bootstrap$Bootstrap$Popover$initialState, helpText);
+	});
+var author$project$Main$insuranceHelpText = 'Estimated amount of yearly insurance due once owning the house. This enters into the weekly payment calculation.';
+var author$project$Main$loanRateHelpText = 'Annual compound interest.';
+var author$project$Main$loanTermHelpText = 'The length of the loan in years.';
+var author$project$Main$paymentHelpText = 'N/A';
+var author$project$Main$ratesHelpText = 'Estimated amount of yearly rates due once owning the house. This enters into the weekly payment calculation.';
+var author$project$Main$sellerEquityHelpText = 'Value of the Seller\'s equity, ie. the total value of paid off mortgages (for instance, if you\'ve paid $200k off a $500k loan, your equity is $200k).';
+var author$project$Main$sellerMortgageHelpText = 'Value of the Seller\'s mortgage in progress (for instance, if you\'ve paid $200k off a $500k loan, your equity is $300k).';
 var elm$core$Basics$EQ = {$: 'EQ'};
 var elm$core$Basics$GT = {$: 'GT'};
 var elm$core$Basics$LT = {$: 'LT'};
@@ -4479,9 +4534,8 @@ var elm$core$Array$toList = function (array) {
 	return A3(elm$core$Array$foldr, elm$core$List$cons, _List_Nil, array);
 };
 var elm$core$Basics$add = _Basics_add;
-var elm$core$Basics$sub = _Basics_sub;
 var author$project$Main$calculateLoanAmount = function (model) {
-	return (model.c_hv + model.c_he) - model.c_cd;
+	return model.c_hv + model.c_he;
 };
 var author$project$Loan$paymentsNumber = function (loan) {
 	return loan.term;
@@ -4500,6 +4554,7 @@ var elm$core$Basics$negate = function (n) {
 	return -n;
 };
 var elm$core$Basics$pow = _Basics_pow;
+var elm$core$Basics$sub = _Basics_sub;
 var elm$core$Basics$toFloat = _Basics_toFloat;
 var author$project$Loan$payment = function (loan) {
 	var r = author$project$Loan$w_interest_rate(loan);
@@ -4508,7 +4563,7 @@ var author$project$Loan$payment = function (loan) {
 	return loan.amount * d;
 };
 var author$project$Main$weeklyPayment = function (model) {
-	return author$project$Loan$payment(model.loan) + ((model.c_insur + model.c_tax) / 52);
+	return author$project$Loan$payment(model.loan) + ((model.c_insur + model.c_rates) / 52);
 };
 var author$project$Main$updateCalculations = function (m) {
 	var up_la = author$project$Main$calculateLoanAmount(m);
@@ -4528,8 +4583,6 @@ var elm$core$Basics$apL = F2(
 	function (f, x) {
 		return f(x);
 	});
-var elm$core$Maybe$Nothing = {$: 'Nothing'};
-var elm$core$Basics$False = {$: 'False'};
 var elm$core$Basics$True = {$: 'True'};
 var elm$core$Result$isOk = function (result) {
 	if (result.$ === 'Ok') {
@@ -4916,18 +4969,20 @@ var author$project$Main$init = function (_n0) {
 	return _Utils_Tuple2(
 		author$project$Main$updateCalculations(
 			author$project$Main$Model(
-				A3(author$project$Main$Field, 'House value ($)', '450000', elm$core$Maybe$Nothing))(450000.0)(
-				A3(author$project$Main$Field, 'Market rate (%)', '10', elm$core$Maybe$Nothing))(0.1)(
-				A3(author$project$Main$Field, 'House extras ($)', '0', elm$core$Maybe$Nothing))(0)(
-				A3(author$project$Main$Field, 'Loan term (y)', '25', elm$core$Maybe$Nothing))(
-				A3(author$project$Main$Field, 'Loan rate (%)', '5', elm$core$Maybe$Nothing))(
+				A4(author$project$Main$initField, author$project$Main$HouseValue, 'House value ($)', '450000', author$project$Main$houseValueHelpText))(450000.0)(
+				A4(author$project$Main$initField, author$project$Main$HouseRate, 'Market rate (%)', '10', author$project$Main$houseRateHelpText))(0.1)(
+				A4(author$project$Main$initField, author$project$Main$HouseExtras, 'House extras ($)', '0', author$project$Main$houseExtrasHelpText))(0)(
+				A4(author$project$Main$initField, author$project$Main$LoanTerm, 'Home Loan term (y)', '25', author$project$Main$loanTermHelpText))(
+				A4(author$project$Main$initField, author$project$Main$LoanRate, 'Home Loan rate (%)', '5', author$project$Main$loanRateHelpText))(
 				A3(author$project$Loan$Model, 52 * 25, 5.0e-2, 500000))(
-				A3(author$project$Main$Field, 'Payment ($/w)', '500', elm$core$Maybe$Nothing))(500.0)(
-				A3(author$project$Main$Field, 'Contract term (y)', '3', elm$core$Maybe$Nothing))(3)(
-				A3(author$project$Main$Field, 'Contract deposit ($)', '10000', elm$core$Maybe$Nothing))(10000)(
-				A3(author$project$Main$Field, 'Tax ($/y)', '1000', elm$core$Maybe$Nothing))(1000)(
-				A3(author$project$Main$Field, 'Insurance ($/y)', '1000', elm$core$Maybe$Nothing))(1000)(
-				A3(author$project$Main$Field, 'Tenant deposit ($/w)', '100', elm$core$Maybe$Nothing))(100)),
+				A4(author$project$Main$initField, author$project$Main$Payment, 'Payment ($/w)', '500', author$project$Main$paymentHelpText))(500.0)(
+				A4(author$project$Main$initField, author$project$Main$ContractTerm, 'Contract term (y)', '3', author$project$Main$contractTermHelpText))(3)(
+				A4(author$project$Main$initField, author$project$Main$SellerEquity, 'Seller equity ($)', '300000', author$project$Main$sellerEquityHelpText))(300000)(
+				A4(author$project$Main$initField, author$project$Main$SellerMortgage, 'Seller mortgage ($)', '100000', author$project$Main$sellerMortgageHelpText))(100000)(
+				A4(author$project$Main$initField, author$project$Main$Rates, 'Rates ($/y)', '1000', author$project$Main$ratesHelpText))(1000)(
+				A4(author$project$Main$initField, author$project$Main$Insurance, 'Insurance ($/y)', '1000', author$project$Main$insuranceHelpText))(1000)(
+				A4(author$project$Main$initField, author$project$Main$BuyerDeposit, 'Buyer deposit ($/w)', '100', author$project$Main$buyerDepositHelpText))(100)(
+				A4(author$project$Main$initField, author$project$Main$BuyerBond, 'Buyer bond ($/w)', '100', author$project$Main$buyerBondHelpText))(100)),
 		elm$core$Platform$Cmd$none);
 };
 var elm$core$Platform$Sub$batch = _Platform_batch;
@@ -4972,6 +5027,64 @@ var author$project$Main$updateField = F6(
 					up_f,
 					A2(up_c, m, f.value),
 					author$project$Main$resetError(n_f)));
+		}
+	});
+var author$project$Main$updateFieldPopover = F2(
+	function (f, m) {
+		var _n0 = f.fieldType;
+		switch (_n0.$) {
+			case 'HouseValue':
+				return _Utils_update(
+					m,
+					{f_hv: f});
+			case 'HouseExtras':
+				return _Utils_update(
+					m,
+					{f_he: f});
+			case 'HouseRate':
+				return _Utils_update(
+					m,
+					{f_hr: f});
+			case 'LoanRate':
+				return _Utils_update(
+					m,
+					{f_lr: f});
+			case 'LoanTerm':
+				return _Utils_update(
+					m,
+					{f_lt: f});
+			case 'Insurance':
+				return _Utils_update(
+					m,
+					{f_insur: f});
+			case 'Rates':
+				return _Utils_update(
+					m,
+					{f_rates: f});
+			case 'Payment':
+				return _Utils_update(
+					m,
+					{f_pay: f});
+			case 'ContractTerm':
+				return _Utils_update(
+					m,
+					{f_ct: f});
+			case 'SellerEquity':
+				return _Utils_update(
+					m,
+					{f_se: f});
+			case 'SellerMortgage':
+				return _Utils_update(
+					m,
+					{f_sm: f});
+			case 'BuyerDeposit':
+				return _Utils_update(
+					m,
+					{f_twd: f});
+			default:
+				return _Utils_update(
+					m,
+					{f_tb: f});
 		}
 	});
 var author$project$Main$FField = function (value) {
@@ -5194,26 +5307,26 @@ var author$project$Main$update = F2(
 									{loan: nl});
 							})),
 					elm$core$Platform$Cmd$none);
-			case 'ChangeTax':
+			case 'ChangeRates':
 				var s = msg.a;
 				return _Utils_Tuple2(
 					A6(
 						author$project$Main$updateField,
 						model,
 						s,
-						model.f_tax,
+						model.f_rates,
 						author$project$Main$validateFloatField,
 						F2(
 							function (m, f) {
 								return _Utils_update(
 									m,
-									{f_tax: f});
+									{f_rates: f});
 							}),
 						F2(
 							function (m, c) {
 								return _Utils_update(
 									m,
-									{c_tax: c});
+									{c_rates: c});
 							})),
 					elm$core$Platform$Cmd$none);
 			case 'ChangeInsurance':
@@ -5260,26 +5373,48 @@ var author$project$Main$update = F2(
 									{c_pay: c});
 							})),
 					elm$core$Platform$Cmd$none);
-			case 'ChangeContractDeposit':
+			case 'ChangeSellerEquity':
 				var s = msg.a;
 				return _Utils_Tuple2(
 					A6(
 						author$project$Main$updateField,
 						model,
 						s,
-						model.f_cd,
+						model.f_se,
 						author$project$Main$validateFloatField,
 						F2(
 							function (m, f) {
 								return _Utils_update(
 									m,
-									{f_cd: f});
+									{f_se: f});
 							}),
 						F2(
 							function (m, c) {
 								return _Utils_update(
 									m,
-									{c_cd: c});
+									{c_se: c});
+							})),
+					elm$core$Platform$Cmd$none);
+			case 'ChangeSellerMortgage':
+				var s = msg.a;
+				return _Utils_Tuple2(
+					A6(
+						author$project$Main$updateField,
+						model,
+						s,
+						model.f_sm,
+						author$project$Main$validateFloatField,
+						F2(
+							function (m, f) {
+								return _Utils_update(
+									m,
+									{f_sm: f});
+							}),
+						F2(
+							function (m, c) {
+								return _Utils_update(
+									m,
+									{c_sm: c});
 							})),
 					elm$core$Platform$Cmd$none);
 			case 'ChangeContractTerm':
@@ -5304,7 +5439,7 @@ var author$project$Main$update = F2(
 									{c_ct: i});
 							})),
 					elm$core$Platform$Cmd$none);
-			default:
+			case 'ChangeBuyerDeposit':
 				var s = msg.a;
 				return _Utils_Tuple2(
 					A6(
@@ -5326,16 +5461,354 @@ var author$project$Main$update = F2(
 									{c_twd: c});
 							})),
 					elm$core$Platform$Cmd$none);
+			case 'ChangeBuyerBond':
+				var s = msg.a;
+				return _Utils_Tuple2(
+					A6(
+						author$project$Main$updateField,
+						model,
+						s,
+						model.f_tb,
+						author$project$Main$validateFloatField,
+						F2(
+							function (m, f) {
+								return _Utils_update(
+									m,
+									{f_tb: f});
+							}),
+						F2(
+							function (m, c) {
+								return _Utils_update(
+									m,
+									{c_tb: c});
+							})),
+					elm$core$Platform$Cmd$none);
+			default:
+				var f = msg.a;
+				var s = msg.b;
+				return _Utils_Tuple2(
+					A2(
+						author$project$Main$updateFieldPopover,
+						_Utils_update(
+							f,
+							{popoverState: s}),
+						model),
+					elm$core$Platform$Cmd$none);
 		}
 	});
-var author$project$Main$ChangeContractDeposit = function (a) {
-	return {$: 'ChangeContractDeposit', a: a};
+var author$project$Main$builtDeposit = function (model) {
+	return (model.c_twd * 52) * model.c_ct;
 };
-var author$project$Main$ChangeContractTerm = function (a) {
-	return {$: 'ChangeContractTerm', a: a};
+var author$project$Main$houseCapitalGain = function (model) {
+	return (model.c_hv * A2(elm$core$Basics$pow, 1 + model.c_hr, model.c_ct)) - model.c_hv;
 };
-var elm$core$Basics$identity = function (x) {
-	return x;
+var author$project$Main$totalDeposit = function (model) {
+	return author$project$Main$builtDeposit(model) + author$project$Main$houseCapitalGain(model);
+};
+var author$project$Main$lvrBuyer = function (model) {
+	return model.loan.amount / (model.c_hv + author$project$Main$totalDeposit(model));
+};
+var author$project$Main$pluralize = F3(
+	function (singular, plural, count) {
+		return (count === 1) ? ('1 ' + singular) : (elm$core$String$fromInt(count) + (' ' + plural));
+	});
+var elm$core$Basics$ge = _Utils_ge;
+var elm$core$Basics$not = _Basics_not;
+var elm$core$Basics$abs = function (n) {
+	return (n < 0) ? (-n) : n;
+};
+var elm$core$Basics$isInfinite = _Basics_isInfinite;
+var elm$core$Basics$isNaN = _Basics_isNaN;
+var elm$core$Maybe$map = F2(
+	function (f, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return elm$core$Maybe$Just(
+				f(value));
+		} else {
+			return elm$core$Maybe$Nothing;
+		}
+	});
+var elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
+var elm$core$String$fromFloat = _String_fromNumber;
+var elm$core$String$length = _String_length;
+var elm$core$String$cons = _String_cons;
+var elm$core$String$fromChar = function (_char) {
+	return A2(elm$core$String$cons, _char, '');
+};
+var elm$core$Bitwise$and = _Bitwise_and;
+var elm$core$Bitwise$shiftRightBy = _Bitwise_shiftRightBy;
+var elm$core$String$repeatHelp = F3(
+	function (n, chunk, result) {
+		return (n <= 0) ? result : A3(
+			elm$core$String$repeatHelp,
+			n >> 1,
+			_Utils_ap(chunk, chunk),
+			(!(n & 1)) ? result : _Utils_ap(result, chunk));
+	});
+var elm$core$String$repeat = F2(
+	function (n, chunk) {
+		return A3(elm$core$String$repeatHelp, n, chunk, '');
+	});
+var elm$core$String$padRight = F3(
+	function (n, _char, string) {
+		return _Utils_ap(
+			string,
+			A2(
+				elm$core$String$repeat,
+				n - elm$core$String$length(string),
+				elm$core$String$fromChar(_char)));
+	});
+var elm$core$String$reverse = _String_reverse;
+var elm$core$String$slice = _String_slice;
+var elm$core$Basics$neq = _Utils_notEqual;
+var elm$core$List$any = F2(
+	function (isOkay, list) {
+		any:
+		while (true) {
+			if (!list.b) {
+				return false;
+			} else {
+				var x = list.a;
+				var xs = list.b;
+				if (isOkay(x)) {
+					return true;
+				} else {
+					var $temp$isOkay = isOkay,
+						$temp$list = xs;
+					isOkay = $temp$isOkay;
+					list = $temp$list;
+					continue any;
+				}
+			}
+		}
+	});
+var elm$core$String$foldr = _String_foldr;
+var elm$core$String$toList = function (string) {
+	return A3(elm$core$String$foldr, elm$core$List$cons, _List_Nil, string);
+};
+var myrho$elm_round$Round$addSign = F2(
+	function (signed, str) {
+		var isNotZero = A2(
+			elm$core$List$any,
+			function (c) {
+				return (!_Utils_eq(
+					c,
+					_Utils_chr('0'))) && (!_Utils_eq(
+					c,
+					_Utils_chr('.')));
+			},
+			elm$core$String$toList(str));
+		return _Utils_ap(
+			(signed && isNotZero) ? '-' : '',
+			str);
+	});
+var elm$core$Char$fromCode = _Char_fromCode;
+var myrho$elm_round$Round$increaseNum = function (_n0) {
+	var head = _n0.a;
+	var tail = _n0.b;
+	if (_Utils_eq(
+		head,
+		_Utils_chr('9'))) {
+		var _n1 = elm$core$String$uncons(tail);
+		if (_n1.$ === 'Nothing') {
+			return '01';
+		} else {
+			var headtail = _n1.a;
+			return A2(
+				elm$core$String$cons,
+				_Utils_chr('0'),
+				myrho$elm_round$Round$increaseNum(headtail));
+		}
+	} else {
+		var c = elm$core$Char$toCode(head);
+		return ((c >= 48) && (c < 57)) ? A2(
+			elm$core$String$cons,
+			elm$core$Char$fromCode(c + 1),
+			tail) : '0';
+	}
+};
+var myrho$elm_round$Round$splitComma = function (str) {
+	var _n0 = A2(elm$core$String$split, '.', str);
+	if (_n0.b) {
+		if (_n0.b.b) {
+			var before = _n0.a;
+			var _n1 = _n0.b;
+			var after = _n1.a;
+			return _Utils_Tuple2(before, after);
+		} else {
+			var before = _n0.a;
+			return _Utils_Tuple2(before, '0');
+		}
+	} else {
+		return _Utils_Tuple2('0', '0');
+	}
+};
+var elm$core$String$dropLeft = F2(
+	function (n, string) {
+		return (n < 1) ? string : A3(
+			elm$core$String$slice,
+			n,
+			elm$core$String$length(string),
+			string);
+	});
+var elm$core$String$startsWith = _String_startsWith;
+var elm$core$Tuple$mapFirst = F2(
+	function (func, _n0) {
+		var x = _n0.a;
+		var y = _n0.b;
+		return _Utils_Tuple2(
+			func(x),
+			y);
+	});
+var myrho$elm_round$Round$toDecimal = function (fl) {
+	var _n0 = A2(
+		elm$core$String$split,
+		'e',
+		elm$core$String$fromFloat(
+			elm$core$Basics$abs(fl)));
+	if (_n0.b) {
+		if (_n0.b.b) {
+			var num = _n0.a;
+			var _n1 = _n0.b;
+			var exp = _n1.a;
+			var e = A2(
+				elm$core$Maybe$withDefault,
+				0,
+				elm$core$String$toInt(
+					A2(elm$core$String$startsWith, '+', exp) ? A2(elm$core$String$dropLeft, 1, exp) : exp));
+			var _n2 = myrho$elm_round$Round$splitComma(num);
+			var before = _n2.a;
+			var after = _n2.b;
+			var total = _Utils_ap(before, after);
+			var zeroed = (e < 0) ? A2(
+				elm$core$Maybe$withDefault,
+				'0',
+				A2(
+					elm$core$Maybe$map,
+					function (_n3) {
+						var a = _n3.a;
+						var b = _n3.b;
+						return a + ('.' + b);
+					},
+					A2(
+						elm$core$Maybe$map,
+						elm$core$Tuple$mapFirst(elm$core$String$fromChar),
+						elm$core$String$uncons(
+							_Utils_ap(
+								A2(
+									elm$core$String$repeat,
+									elm$core$Basics$abs(e),
+									'0'),
+								total))))) : A3(
+				elm$core$String$padRight,
+				e + 1,
+				_Utils_chr('0'),
+				total);
+			return _Utils_ap(
+				(fl < 0) ? '-' : '',
+				zeroed);
+		} else {
+			var num = _n0.a;
+			return _Utils_ap(
+				(fl < 0) ? '-' : '',
+				num);
+		}
+	} else {
+		return '';
+	}
+};
+var myrho$elm_round$Round$roundFun = F3(
+	function (functor, s, fl) {
+		if (elm$core$Basics$isInfinite(fl) || elm$core$Basics$isNaN(fl)) {
+			return elm$core$String$fromFloat(fl);
+		} else {
+			var signed = fl < 0;
+			var _n0 = myrho$elm_round$Round$splitComma(
+				myrho$elm_round$Round$toDecimal(
+					elm$core$Basics$abs(fl)));
+			var before = _n0.a;
+			var after = _n0.b;
+			var r = elm$core$String$length(before) + s;
+			var normalized = _Utils_ap(
+				A2(elm$core$String$repeat, (-r) + 1, '0'),
+				A3(
+					elm$core$String$padRight,
+					r,
+					_Utils_chr('0'),
+					_Utils_ap(before, after)));
+			var totalLen = elm$core$String$length(normalized);
+			var roundDigitIndex = A2(elm$core$Basics$max, 1, r);
+			var increase = A2(
+				functor,
+				signed,
+				A3(elm$core$String$slice, roundDigitIndex, totalLen, normalized));
+			var remains = A3(elm$core$String$slice, 0, roundDigitIndex, normalized);
+			var num = increase ? elm$core$String$reverse(
+				A2(
+					elm$core$Maybe$withDefault,
+					'1',
+					A2(
+						elm$core$Maybe$map,
+						myrho$elm_round$Round$increaseNum,
+						elm$core$String$uncons(
+							elm$core$String$reverse(remains))))) : remains;
+			var numLen = elm$core$String$length(num);
+			var numZeroed = (num === '0') ? num : ((s <= 0) ? _Utils_ap(
+				num,
+				A2(
+					elm$core$String$repeat,
+					elm$core$Basics$abs(s),
+					'0')) : ((_Utils_cmp(
+				s,
+				elm$core$String$length(after)) < 0) ? (A3(elm$core$String$slice, 0, numLen - s, num) + ('.' + A3(elm$core$String$slice, numLen - s, numLen, num))) : _Utils_ap(
+				before + '.',
+				A3(
+					elm$core$String$padRight,
+					s,
+					_Utils_chr('0'),
+					after))));
+			return A2(myrho$elm_round$Round$addSign, signed, numZeroed);
+		}
+	});
+var myrho$elm_round$Round$round = myrho$elm_round$Round$roundFun(
+	F2(
+		function (signed, str) {
+			var _n0 = elm$core$String$uncons(str);
+			if (_n0.$ === 'Nothing') {
+				return false;
+			} else {
+				if ('5' === _n0.a.a.valueOf()) {
+					if (_n0.a.b === '') {
+						var _n1 = _n0.a;
+						return !signed;
+					} else {
+						var _n2 = _n0.a;
+						return true;
+					}
+				} else {
+					var _n3 = _n0.a;
+					var _int = _n3.a;
+					return function (i) {
+						return ((i > 53) && signed) || ((i >= 53) && (!signed));
+					}(
+						elm$core$Char$toCode(_int));
+				}
+			}
+		}));
+var author$project$Main$viewAsDollar = function (f) {
+	return '$ ' + A2(myrho$elm_round$Round$round, 2, f);
+};
+var author$project$Main$viewAsPercent = function (f) {
+	return A2(myrho$elm_round$Round$round, 2, 100 * f) + ' %';
 };
 var elm$json$Json$Decode$map = _Json_map1;
 var elm$json$Json$Decode$map2 = _Json_map2;
@@ -5352,16 +5825,82 @@ var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 			return 3;
 	}
 };
+var elm$html$Html$div = _VirtualDom_node('div');
 var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
-var elm$html$Html$div = _VirtualDom_node('div');
-var rundis$elm_bootstrap$Bootstrap$Form$Col = function (a) {
-	return {$: 'Col', a: a};
+var rundis$elm_bootstrap$Bootstrap$Badge$Danger = {$: 'Danger'};
+var rundis$elm_bootstrap$Bootstrap$Badge$Roled = function (a) {
+	return {$: 'Roled', a: a};
 };
-var rundis$elm_bootstrap$Bootstrap$Form$col = F2(
-	function (options, children) {
-		return rundis$elm_bootstrap$Bootstrap$Form$Col(
-			{children: children, elemFn: elm$html$Html$div, options: options});
+var elm$html$Html$span = _VirtualDom_node('span');
+var elm$core$List$foldrHelper = F4(
+	function (fn, acc, ctr, ls) {
+		if (!ls.b) {
+			return acc;
+		} else {
+			var a = ls.a;
+			var r1 = ls.b;
+			if (!r1.b) {
+				return A2(fn, a, acc);
+			} else {
+				var b = r1.a;
+				var r2 = r1.b;
+				if (!r2.b) {
+					return A2(
+						fn,
+						a,
+						A2(fn, b, acc));
+				} else {
+					var c = r2.a;
+					var r3 = r2.b;
+					if (!r3.b) {
+						return A2(
+							fn,
+							a,
+							A2(
+								fn,
+								b,
+								A2(fn, c, acc)));
+					} else {
+						var d = r3.a;
+						var r4 = r3.b;
+						var res = (ctr > 500) ? A3(
+							elm$core$List$foldl,
+							fn,
+							acc,
+							elm$core$List$reverse(r4)) : A4(elm$core$List$foldrHelper, fn, acc, ctr + 1, r4);
+						return A2(
+							fn,
+							a,
+							A2(
+								fn,
+								b,
+								A2(
+									fn,
+									c,
+									A2(fn, d, res))));
+					}
+				}
+			}
+		}
+	});
+var elm$core$List$foldr = F3(
+	function (fn, acc, ls) {
+		return A4(elm$core$List$foldrHelper, fn, acc, 0, ls);
+	});
+var elm$core$List$map = F2(
+	function (f, xs) {
+		return A3(
+			elm$core$List$foldr,
+			F2(
+				function (x, acc) {
+					return A2(
+						elm$core$List$cons,
+						f(x),
+						acc);
+				}),
+			_List_Nil,
+			xs);
 	});
 var elm$json$Json$Encode$string = _Json_wrap;
 var elm$html$Html$Attributes$stringProperty = F2(
@@ -5372,6 +5911,477 @@ var elm$html$Html$Attributes$stringProperty = F2(
 			elm$json$Json$Encode$string(string));
 	});
 var elm$html$Html$Attributes$class = elm$html$Html$Attributes$stringProperty('className');
+var rundis$elm_bootstrap$Bootstrap$Badge$roleOption = function (role) {
+	switch (role.$) {
+		case 'Primary':
+			return 'badge-primary';
+		case 'Secondary':
+			return 'badge-secondary';
+		case 'Success':
+			return 'badge-success';
+		case 'Info':
+			return 'badge-info';
+		case 'Warning':
+			return 'badge-warning';
+		case 'Danger':
+			return 'badge-danger';
+		case 'Light':
+			return 'badge-light';
+		default:
+			return 'badge-dark';
+	}
+};
+var rundis$elm_bootstrap$Bootstrap$Badge$badgeClass = function (option) {
+	return elm$html$Html$Attributes$class(
+		function () {
+			if (option.$ === 'Pill') {
+				return 'badge-pill';
+			} else {
+				var role = option.a;
+				return rundis$elm_bootstrap$Bootstrap$Badge$roleOption(role);
+			}
+		}());
+};
+var rundis$elm_bootstrap$Bootstrap$Badge$badgeAttributes = function (options) {
+	return A2(
+		elm$core$List$cons,
+		elm$html$Html$Attributes$class('badge'),
+		A2(elm$core$List$map, rundis$elm_bootstrap$Bootstrap$Badge$badgeClass, options));
+};
+var rundis$elm_bootstrap$Bootstrap$Badge$badgeInternal = F3(
+	function (options, attributes, children) {
+		return A2(
+			elm$html$Html$span,
+			_Utils_ap(
+				rundis$elm_bootstrap$Bootstrap$Badge$badgeAttributes(options),
+				attributes),
+			children);
+	});
+var rundis$elm_bootstrap$Bootstrap$Badge$badgeDanger = rundis$elm_bootstrap$Bootstrap$Badge$badgeInternal(
+	_List_fromArray(
+		[
+			rundis$elm_bootstrap$Bootstrap$Badge$Roled(rundis$elm_bootstrap$Bootstrap$Badge$Danger)
+		]));
+var rundis$elm_bootstrap$Bootstrap$Badge$Success = {$: 'Success'};
+var rundis$elm_bootstrap$Bootstrap$Badge$badgeSuccess = rundis$elm_bootstrap$Bootstrap$Badge$badgeInternal(
+	_List_fromArray(
+		[
+			rundis$elm_bootstrap$Bootstrap$Badge$Roled(rundis$elm_bootstrap$Bootstrap$Badge$Success)
+		]));
+var author$project$Main$viewAsLvr = function (lvr) {
+	return A2(
+		elm$html$Html$div,
+		_List_Nil,
+		_List_fromArray(
+			[
+				elm$html$Html$text(
+				'LVR ' + (author$project$Main$viewAsPercent(lvr) + ' ')),
+				(lvr >= 0.8) ? A2(
+				rundis$elm_bootstrap$Bootstrap$Badge$badgeDanger,
+				_List_Nil,
+				_List_fromArray(
+					[
+						elm$html$Html$text('Too high')
+					])) : A2(
+				rundis$elm_bootstrap$Bootstrap$Badge$badgeSuccess,
+				_List_Nil,
+				_List_fromArray(
+					[
+						elm$html$Html$text('Ok')
+					]))
+			]));
+};
+var author$project$Main$weeklySpending = function (model) {
+	return (model.c_pay + model.c_twd) + model.c_tb;
+};
+var elm$html$Html$h3 = _VirtualDom_node('h3');
+var elm$html$Html$h4 = _VirtualDom_node('h4');
+var elm$html$Html$li = _VirtualDom_node('li');
+var elm$html$Html$ul = _VirtualDom_node('ul');
+var rundis$elm_bootstrap$Bootstrap$Alert$Shown = {$: 'Shown'};
+var rundis$elm_bootstrap$Bootstrap$Alert$Config = function (a) {
+	return {$: 'Config', a: a};
+};
+var rundis$elm_bootstrap$Bootstrap$Alert$attrs = F2(
+	function (attributes, _n0) {
+		var configRec = _n0.a;
+		return rundis$elm_bootstrap$Bootstrap$Alert$Config(
+			_Utils_update(
+				configRec,
+				{attributes: attributes}));
+	});
+var rundis$elm_bootstrap$Bootstrap$Alert$children = F2(
+	function (children_, _n0) {
+		var configRec = _n0.a;
+		return rundis$elm_bootstrap$Bootstrap$Alert$Config(
+			_Utils_update(
+				configRec,
+				{children: children_}));
+	});
+var rundis$elm_bootstrap$Bootstrap$Internal$Role$Secondary = {$: 'Secondary'};
+var rundis$elm_bootstrap$Bootstrap$Alert$config = rundis$elm_bootstrap$Bootstrap$Alert$Config(
+	{attributes: _List_Nil, children: _List_Nil, dismissable: elm$core$Maybe$Nothing, role: rundis$elm_bootstrap$Bootstrap$Internal$Role$Secondary, visibility: rundis$elm_bootstrap$Bootstrap$Alert$Shown, withAnimation: false});
+var rundis$elm_bootstrap$Bootstrap$Alert$role = F2(
+	function (role_, _n0) {
+		var configRec = _n0.a;
+		return rundis$elm_bootstrap$Bootstrap$Alert$Config(
+			_Utils_update(
+				configRec,
+				{role: role_}));
+	});
+var elm$html$Html$button = _VirtualDom_node('button');
+var elm$virtual_dom$VirtualDom$attribute = F2(
+	function (key, value) {
+		return A2(
+			_VirtualDom_attribute,
+			_VirtualDom_noOnOrFormAction(key),
+			_VirtualDom_noJavaScriptOrHtmlUri(value));
+	});
+var elm$html$Html$Attributes$attribute = elm$virtual_dom$VirtualDom$attribute;
+var elm$html$Html$Attributes$type_ = elm$html$Html$Attributes$stringProperty('type');
+var elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 'Normal', a: a};
+};
+var elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			elm$virtual_dom$VirtualDom$on,
+			event,
+			elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
+var elm$html$Html$Events$onClick = function (msg) {
+	return A2(
+		elm$html$Html$Events$on,
+		'click',
+		elm$json$Json$Decode$succeed(msg));
+};
+var rundis$elm_bootstrap$Bootstrap$Alert$Closed = {$: 'Closed'};
+var rundis$elm_bootstrap$Bootstrap$Alert$StartClose = {$: 'StartClose'};
+var rundis$elm_bootstrap$Bootstrap$Alert$clickHandler = F2(
+	function (visibility, configRec) {
+		var handleClick = F2(
+			function (viz, toMsg) {
+				return elm$html$Html$Events$onClick(
+					toMsg(viz));
+			});
+		var _n0 = configRec.dismissable;
+		if (_n0.$ === 'Just') {
+			var dismissMsg = _n0.a;
+			return _List_fromArray(
+				[
+					configRec.withAnimation ? A2(handleClick, rundis$elm_bootstrap$Bootstrap$Alert$StartClose, dismissMsg) : A2(handleClick, rundis$elm_bootstrap$Bootstrap$Alert$Closed, dismissMsg)
+				]);
+		} else {
+			return _List_Nil;
+		}
+	});
+var rundis$elm_bootstrap$Bootstrap$Alert$injectButton = F2(
+	function (btn, children_) {
+		if (children_.b) {
+			var head = children_.a;
+			var tail = children_.b;
+			return A2(
+				elm$core$List$cons,
+				head,
+				A2(elm$core$List$cons, btn, tail));
+		} else {
+			return _List_fromArray(
+				[btn]);
+		}
+	});
+var rundis$elm_bootstrap$Bootstrap$Alert$isDismissable = function (configRec) {
+	var _n0 = configRec.dismissable;
+	if (_n0.$ === 'Just') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var rundis$elm_bootstrap$Bootstrap$Alert$maybeAddDismissButton = F3(
+	function (visibilty, configRec, children_) {
+		return rundis$elm_bootstrap$Bootstrap$Alert$isDismissable(configRec) ? A2(
+			rundis$elm_bootstrap$Bootstrap$Alert$injectButton,
+			A2(
+				elm$html$Html$button,
+				_Utils_ap(
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$type_('button'),
+							elm$html$Html$Attributes$class('close'),
+							A2(elm$html$Html$Attributes$attribute, 'aria-label', 'close')
+						]),
+					A2(rundis$elm_bootstrap$Bootstrap$Alert$clickHandler, visibilty, configRec)),
+				_List_fromArray(
+					[
+						A2(
+						elm$html$Html$span,
+						_List_fromArray(
+							[
+								A2(elm$html$Html$Attributes$attribute, 'aria-hidden', 'true')
+							]),
+						_List_fromArray(
+							[
+								elm$html$Html$text('×')
+							]))
+					])),
+			children_) : children_;
+	});
+var elm$core$List$append = F2(
+	function (xs, ys) {
+		if (!ys.b) {
+			return xs;
+		} else {
+			return A3(elm$core$List$foldr, elm$core$List$cons, ys, xs);
+		}
+	});
+var elm$core$List$concat = function (lists) {
+	return A3(elm$core$List$foldr, elm$core$List$append, _List_Nil, lists);
+};
+var elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2(elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
+var elm$core$Tuple$second = function (_n0) {
+	var y = _n0.b;
+	return y;
+};
+var elm$html$Html$Attributes$classList = function (classes) {
+	return elm$html$Html$Attributes$class(
+		A2(
+			elm$core$String$join,
+			' ',
+			A2(
+				elm$core$List$map,
+				elm$core$Tuple$first,
+				A2(elm$core$List$filter, elm$core$Tuple$second, classes))));
+};
+var elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var elm$html$Html$Attributes$style = elm$virtual_dom$VirtualDom$style;
+var rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass = F2(
+	function (prefix, role) {
+		return elm$html$Html$Attributes$class(
+			prefix + ('-' + function () {
+				switch (role.$) {
+					case 'Primary':
+						return 'primary';
+					case 'Secondary':
+						return 'secondary';
+					case 'Success':
+						return 'success';
+					case 'Info':
+						return 'info';
+					case 'Warning':
+						return 'warning';
+					case 'Danger':
+						return 'danger';
+					case 'Light':
+						return 'light';
+					default:
+						return 'dark';
+				}
+			}()));
+	});
+var rundis$elm_bootstrap$Bootstrap$Alert$viewAttributes = F2(
+	function (visibility, configRec) {
+		var visibiltyAttributes = _Utils_eq(visibility, rundis$elm_bootstrap$Bootstrap$Alert$Closed) ? _List_fromArray(
+			[
+				A2(elm$html$Html$Attributes$style, 'display', 'none')
+			]) : _List_Nil;
+		var animationAttributes = function () {
+			if (configRec.withAnimation) {
+				var _n0 = configRec.dismissable;
+				if (_n0.$ === 'Just') {
+					var dismissMsg = _n0.a;
+					return _List_fromArray(
+						[
+							A2(
+							elm$html$Html$Events$on,
+							'transitionend',
+							elm$json$Json$Decode$succeed(
+								dismissMsg(rundis$elm_bootstrap$Bootstrap$Alert$Closed)))
+						]);
+				} else {
+					return _List_Nil;
+				}
+			} else {
+				return _List_Nil;
+			}
+		}();
+		var alertAttributes = _List_fromArray(
+			[
+				A2(elm$html$Html$Attributes$attribute, 'role', 'alert'),
+				elm$html$Html$Attributes$classList(
+				_List_fromArray(
+					[
+						_Utils_Tuple2('alert', true),
+						_Utils_Tuple2(
+						'alert-dismissible',
+						rundis$elm_bootstrap$Bootstrap$Alert$isDismissable(configRec)),
+						_Utils_Tuple2('fade', configRec.withAnimation),
+						_Utils_Tuple2(
+						'show',
+						_Utils_eq(visibility, rundis$elm_bootstrap$Bootstrap$Alert$Shown))
+					])),
+				A2(rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'alert', configRec.role)
+			]);
+		return elm$core$List$concat(
+			_List_fromArray(
+				[configRec.attributes, alertAttributes, visibiltyAttributes, animationAttributes]));
+	});
+var rundis$elm_bootstrap$Bootstrap$Alert$view = F2(
+	function (visibility, _n0) {
+		var configRec = _n0.a;
+		return A2(
+			elm$html$Html$div,
+			A2(rundis$elm_bootstrap$Bootstrap$Alert$viewAttributes, visibility, configRec),
+			A3(rundis$elm_bootstrap$Bootstrap$Alert$maybeAddDismissButton, visibility, configRec, configRec.children));
+	});
+var rundis$elm_bootstrap$Bootstrap$Alert$simple = F3(
+	function (role_, attributes, children_) {
+		return A2(
+			rundis$elm_bootstrap$Bootstrap$Alert$view,
+			rundis$elm_bootstrap$Bootstrap$Alert$Shown,
+			A2(
+				rundis$elm_bootstrap$Bootstrap$Alert$children,
+				children_,
+				A2(
+					rundis$elm_bootstrap$Bootstrap$Alert$attrs,
+					attributes,
+					A2(rundis$elm_bootstrap$Bootstrap$Alert$role, role_, rundis$elm_bootstrap$Bootstrap$Alert$config))));
+	});
+var rundis$elm_bootstrap$Bootstrap$Internal$Role$Info = {$: 'Info'};
+var rundis$elm_bootstrap$Bootstrap$Alert$simpleInfo = rundis$elm_bootstrap$Bootstrap$Alert$simple(rundis$elm_bootstrap$Bootstrap$Internal$Role$Info);
+var author$project$Main$viewBuyer = function (model) {
+	return A2(
+		rundis$elm_bootstrap$Bootstrap$Alert$simpleInfo,
+		_List_Nil,
+		_List_fromArray(
+			[
+				A2(
+				elm$html$Html$h3,
+				_List_Nil,
+				_List_fromArray(
+					[
+						elm$html$Html$text('Buyer')
+					])),
+				A2(
+				elm$html$Html$ul,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						elm$html$Html$li,
+						_List_Nil,
+						_List_fromArray(
+							[
+								elm$html$Html$text(
+								'Spends ' + (author$project$Main$viewAsDollar(
+									author$project$Main$weeklySpending(model)) + ' per week'))
+							])),
+						A2(
+						elm$html$Html$li,
+						_List_Nil,
+						_List_fromArray(
+							[
+								elm$html$Html$text('Including '),
+								A2(
+								elm$html$Html$ul,
+								_List_Nil,
+								_List_fromArray(
+									[
+										A2(
+										elm$html$Html$li,
+										_List_Nil,
+										_List_fromArray(
+											[
+												elm$html$Html$text(
+												'Deposit ' + (author$project$Main$viewAsDollar(model.c_twd) + ' per week'))
+											])),
+										A2(
+										elm$html$Html$li,
+										_List_Nil,
+										_List_fromArray(
+											[
+												elm$html$Html$text(
+												'Bond ' + (author$project$Main$viewAsDollar(model.c_tb) + ' per week'))
+											]))
+									]))
+							]))
+					])),
+				A2(
+				elm$html$Html$h4,
+				_List_Nil,
+				_List_fromArray(
+					[
+						elm$html$Html$text(
+						'After ' + A3(author$project$Main$pluralize, 'year', 'years', model.c_ct))
+					])),
+				A2(
+				elm$html$Html$ul,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						elm$html$Html$li,
+						_List_Nil,
+						_List_fromArray(
+							[
+								elm$html$Html$text(
+								'Deposit ' + author$project$Main$viewAsDollar(
+									author$project$Main$builtDeposit(model)))
+							])),
+						A2(
+						elm$html$Html$li,
+						_List_Nil,
+						_List_fromArray(
+							[
+								elm$html$Html$text(
+								'House value ' + author$project$Main$viewAsDollar(
+									model.c_hv + author$project$Main$houseCapitalGain(model)))
+							])),
+						A2(
+						elm$html$Html$li,
+						_List_Nil,
+						_List_fromArray(
+							[
+								author$project$Main$viewAsLvr(
+								author$project$Main$lvrBuyer(model))
+							]))
+					]))
+			]));
+};
+var author$project$Main$ChangeBuyerBond = function (a) {
+	return {$: 'ChangeBuyerBond', a: a};
+};
+var author$project$Main$ChangeBuyerDeposit = function (a) {
+	return {$: 'ChangeBuyerDeposit', a: a};
+};
+var author$project$Main$PopoverMsg = F2(
+	function (a, b) {
+		return {$: 'PopoverMsg', a: a, b: b};
+	});
+var rundis$elm_bootstrap$Bootstrap$Badge$Info = {$: 'Info'};
+var rundis$elm_bootstrap$Bootstrap$Badge$badgeInfo = rundis$elm_bootstrap$Bootstrap$Badge$badgeInternal(
+	_List_fromArray(
+		[
+			rundis$elm_bootstrap$Bootstrap$Badge$Roled(rundis$elm_bootstrap$Bootstrap$Badge$Info)
+		]));
+var rundis$elm_bootstrap$Bootstrap$Form$Col = function (a) {
+	return {$: 'Col', a: a};
+};
+var rundis$elm_bootstrap$Bootstrap$Form$col = F2(
+	function (options, children) {
+		return rundis$elm_bootstrap$Bootstrap$Form$Col(
+			{children: children, elemFn: elm$html$Html$div, options: options});
+	});
 var elm$html$Html$label = _VirtualDom_node('label');
 var rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColAttrs = function (a) {
 	return {$: 'ColAttrs', a: a};
@@ -5444,61 +6454,6 @@ var rundis$elm_bootstrap$Bootstrap$Form$Input$create = F2(
 			});
 	});
 var elm$html$Html$input = _VirtualDom_node('input');
-var elm$core$List$foldrHelper = F4(
-	function (fn, acc, ctr, ls) {
-		if (!ls.b) {
-			return acc;
-		} else {
-			var a = ls.a;
-			var r1 = ls.b;
-			if (!r1.b) {
-				return A2(fn, a, acc);
-			} else {
-				var b = r1.a;
-				var r2 = r1.b;
-				if (!r2.b) {
-					return A2(
-						fn,
-						a,
-						A2(fn, b, acc));
-				} else {
-					var c = r2.a;
-					var r3 = r2.b;
-					if (!r3.b) {
-						return A2(
-							fn,
-							a,
-							A2(
-								fn,
-								b,
-								A2(fn, c, acc)));
-					} else {
-						var d = r3.a;
-						var r4 = r3.b;
-						var res = (ctr > 500) ? A3(
-							elm$core$List$foldl,
-							fn,
-							acc,
-							elm$core$List$reverse(r4)) : A4(elm$core$List$foldrHelper, fn, acc, ctr + 1, r4);
-						return A2(
-							fn,
-							a,
-							A2(
-								fn,
-								b,
-								A2(
-									fn,
-									c,
-									A2(fn, d, res))));
-					}
-				}
-			}
-		}
-	});
-var elm$core$List$foldr = F3(
-	function (fn, acc, ls) {
-		return A4(elm$core$List$foldrHelper, fn, acc, 0, ls);
-	});
 var elm$core$List$maybeCons = F3(
 	function (f, mx, xs) {
 		var _n0 = f(mx);
@@ -5526,16 +6481,6 @@ var elm$core$Maybe$andThen = F2(
 			return elm$core$Maybe$Nothing;
 		}
 	});
-var elm$core$Maybe$map = F2(
-	function (f, maybe) {
-		if (maybe.$ === 'Just') {
-			var value = maybe.a;
-			return elm$core$Maybe$Just(
-				f(value));
-		} else {
-			return elm$core$Maybe$Nothing;
-		}
-	});
 var elm$json$Json$Encode$bool = _Json_wrap;
 var elm$html$Html$Attributes$boolProperty = F2(
 	function (key, bool) {
@@ -5555,7 +6500,6 @@ var elm$html$Html$Events$alwaysStop = function (x) {
 var elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
 	return {$: 'MayStopPropagation', a: a};
 };
-var elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
 var elm$html$Html$Events$stopPropagationOn = F2(
 	function (event, decoder) {
 		return A2(
@@ -5675,7 +6619,6 @@ var rundis$elm_bootstrap$Bootstrap$Form$Input$sizeAttribute = function (size) {
 		},
 		rundis$elm_bootstrap$Bootstrap$General$Internal$screenSizeOption(size));
 };
-var elm$html$Html$Attributes$type_ = elm$html$Html$Attributes$stringProperty('type');
 var rundis$elm_bootstrap$Bootstrap$Form$Input$typeAttribute = function (inputType) {
 	return elm$html$Html$Attributes$type_(
 		function () {
@@ -5764,6 +6707,434 @@ var rundis$elm_bootstrap$Bootstrap$Form$Input$Value = function (a) {
 var rundis$elm_bootstrap$Bootstrap$Form$Input$value = function (value_) {
 	return rundis$elm_bootstrap$Bootstrap$Form$Input$Value(value_);
 };
+var rundis$elm_bootstrap$Bootstrap$Popover$Config = function (a) {
+	return {$: 'Config', a: a};
+};
+var rundis$elm_bootstrap$Bootstrap$Popover$Top = {$: 'Top'};
+var rundis$elm_bootstrap$Bootstrap$Popover$config = function (triggerElement) {
+	return rundis$elm_bootstrap$Bootstrap$Popover$Config(
+		{content: elm$core$Maybe$Nothing, direction: rundis$elm_bootstrap$Bootstrap$Popover$Top, title: elm$core$Maybe$Nothing, triggerElement: triggerElement});
+};
+var rundis$elm_bootstrap$Bootstrap$Popover$Content = function (a) {
+	return {$: 'Content', a: a};
+};
+var rundis$elm_bootstrap$Bootstrap$Popover$content = F3(
+	function (attributes, children, _n0) {
+		var conf = _n0.a;
+		return rundis$elm_bootstrap$Bootstrap$Popover$Config(
+			_Utils_update(
+				conf,
+				{
+					content: elm$core$Maybe$Just(
+						rundis$elm_bootstrap$Bootstrap$Popover$Content(
+							A2(
+								elm$html$Html$div,
+								A2(
+									elm$core$List$cons,
+									elm$html$Html$Attributes$class('popover-body'),
+									attributes),
+								children)))
+				}));
+	});
+var rundis$elm_bootstrap$Bootstrap$Popover$forceClose = F2(
+	function (_n0, toMsg) {
+		var state = _n0.a;
+		return elm$json$Json$Decode$succeed(
+			toMsg(
+				rundis$elm_bootstrap$Bootstrap$Popover$State(
+					_Utils_update(
+						state,
+						{isActive: false}))));
+	});
+var elm$json$Json$Decode$andThen = _Json_andThen;
+var elm$json$Json$Decode$map3 = _Json_map3;
+var rundis$elm_bootstrap$Bootstrap$Popover$DOMState = F3(
+	function (rect, offsetWidth, offsetHeight) {
+		return {offsetHeight: offsetHeight, offsetWidth: offsetWidth, rect: rect};
+	});
+var elm$json$Json$Decode$fail = _Json_fail;
+var elm$json$Json$Decode$oneOf = _Json_oneOf;
+var elm$core$String$contains = _String_contains;
+var rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$className = A2(
+	elm$json$Json$Decode$at,
+	_List_fromArray(
+		['className']),
+	elm$json$Json$Decode$string);
+var rundis$elm_bootstrap$Bootstrap$Popover$isPopover = A2(
+	elm$json$Json$Decode$andThen,
+	function (_class) {
+		return A2(elm$core$String$contains, 'popover', _class) ? elm$json$Json$Decode$succeed(true) : elm$json$Json$Decode$succeed(false);
+	},
+	rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$className);
+var rundis$elm_bootstrap$Bootstrap$Popover$popper = F2(
+	function (path, decoder) {
+		return elm$json$Json$Decode$oneOf(
+			_List_fromArray(
+				[
+					A2(
+					elm$json$Json$Decode$andThen,
+					function (res) {
+						return res ? A2(
+							elm$json$Json$Decode$at,
+							_Utils_ap(
+								path,
+								_List_fromArray(
+									['nextSibling'])),
+							decoder) : elm$json$Json$Decode$fail('');
+					},
+					A2(
+						elm$json$Json$Decode$at,
+						_Utils_ap(
+							path,
+							_List_fromArray(
+								['nextSibling'])),
+						rundis$elm_bootstrap$Bootstrap$Popover$isPopover)),
+					A2(
+					elm$json$Json$Decode$andThen,
+					function (_n0) {
+						return A2(
+							rundis$elm_bootstrap$Bootstrap$Popover$popper,
+							_Utils_ap(
+								path,
+								_List_fromArray(
+									['parentElement'])),
+							decoder);
+					},
+					A2(
+						elm$json$Json$Decode$at,
+						_Utils_ap(
+							path,
+							_List_fromArray(
+								['parentElement'])),
+						rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$className)),
+					elm$json$Json$Decode$fail('No popover found')
+				]));
+	});
+var rundis$elm_bootstrap$Bootstrap$Popover$isTrigger = A2(
+	elm$json$Json$Decode$andThen,
+	function (_class) {
+		return A2(elm$core$String$contains, 'popover-trigger', _class) ? elm$json$Json$Decode$succeed(true) : elm$json$Json$Decode$succeed(false);
+	},
+	rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$className);
+var elm$json$Json$Decode$float = _Json_decodeFloat;
+var rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$offsetHeight = A2(elm$json$Json$Decode$field, 'offsetHeight', elm$json$Json$Decode$float);
+var rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$offsetWidth = A2(elm$json$Json$Decode$field, 'offsetWidth', elm$json$Json$Decode$float);
+var elm$json$Json$Decode$map4 = _Json_map4;
+var rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$offsetLeft = A2(elm$json$Json$Decode$field, 'offsetLeft', elm$json$Json$Decode$float);
+var elm$json$Json$Decode$null = _Json_decodeNull;
+var rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$offsetParent = F2(
+	function (x, decoder) {
+		return elm$json$Json$Decode$oneOf(
+			_List_fromArray(
+				[
+					A2(
+					elm$json$Json$Decode$field,
+					'offsetParent',
+					elm$json$Json$Decode$null(x)),
+					A2(elm$json$Json$Decode$field, 'offsetParent', decoder)
+				]));
+	});
+var rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$offsetTop = A2(elm$json$Json$Decode$field, 'offsetTop', elm$json$Json$Decode$float);
+var rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$scrollLeft = A2(elm$json$Json$Decode$field, 'scrollLeft', elm$json$Json$Decode$float);
+var rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$scrollTop = A2(elm$json$Json$Decode$field, 'scrollTop', elm$json$Json$Decode$float);
+var rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$position = F2(
+	function (x, y) {
+		return A2(
+			elm$json$Json$Decode$andThen,
+			function (_n0) {
+				var x_ = _n0.a;
+				var y_ = _n0.b;
+				return A2(
+					rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$offsetParent,
+					_Utils_Tuple2(x_, y_),
+					A2(rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$position, x_, y_));
+			},
+			A5(
+				elm$json$Json$Decode$map4,
+				F4(
+					function (scrollLeft_, scrollTop_, offsetLeft_, offsetTop_) {
+						return _Utils_Tuple2((x + offsetLeft_) - scrollLeft_, (y + offsetTop_) - scrollTop_);
+					}),
+				rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$scrollLeft,
+				rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$scrollTop,
+				rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$offsetLeft,
+				rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$offsetTop));
+	});
+var rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$boundingArea = A4(
+	elm$json$Json$Decode$map3,
+	F3(
+		function (_n0, width, height) {
+			var x = _n0.a;
+			var y = _n0.b;
+			return {height: height, left: x, top: y, width: width};
+		}),
+	A2(rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$position, 0, 0),
+	rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$offsetWidth,
+	rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$offsetHeight);
+var rundis$elm_bootstrap$Bootstrap$Popover$trigger = function (path) {
+	return elm$json$Json$Decode$oneOf(
+		_List_fromArray(
+			[
+				A2(
+				elm$json$Json$Decode$andThen,
+				function (res) {
+					return res ? A2(elm$json$Json$Decode$at, path, rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$boundingArea) : elm$json$Json$Decode$fail('');
+				},
+				A2(elm$json$Json$Decode$at, path, rundis$elm_bootstrap$Bootstrap$Popover$isTrigger)),
+				A2(
+				elm$json$Json$Decode$andThen,
+				function (_n0) {
+					return rundis$elm_bootstrap$Bootstrap$Popover$trigger(
+						_Utils_ap(
+							path,
+							_List_fromArray(
+								['parentElement'])));
+				},
+				A2(
+					elm$json$Json$Decode$at,
+					_Utils_ap(
+						path,
+						_List_fromArray(
+							['parentElement'])),
+					rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$className)),
+				elm$json$Json$Decode$fail('No trigger found')
+			]));
+};
+var rundis$elm_bootstrap$Bootstrap$Popover$stateDecoder = A4(
+	elm$json$Json$Decode$map3,
+	rundis$elm_bootstrap$Bootstrap$Popover$DOMState,
+	rundis$elm_bootstrap$Bootstrap$Popover$trigger(
+		_List_fromArray(
+			['target'])),
+	A2(
+		rundis$elm_bootstrap$Bootstrap$Popover$popper,
+		_List_fromArray(
+			['target']),
+		rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$offsetWidth),
+	A2(
+		rundis$elm_bootstrap$Bootstrap$Popover$popper,
+		_List_fromArray(
+			['target']),
+		rundis$elm_bootstrap$Bootstrap$Utilities$DomHelper$offsetHeight));
+var rundis$elm_bootstrap$Bootstrap$Popover$toggleState = F2(
+	function (_n0, toMsg) {
+		var state = _n0.a;
+		var isActive = state.isActive;
+		return A2(
+			elm$json$Json$Decode$andThen,
+			function (v) {
+				return elm$json$Json$Decode$succeed(
+					toMsg(
+						(!isActive) ? rundis$elm_bootstrap$Bootstrap$Popover$State(
+							{domState: v, isActive: true}) : rundis$elm_bootstrap$Bootstrap$Popover$State(
+							_Utils_update(
+								state,
+								{isActive: false}))));
+			},
+			rundis$elm_bootstrap$Bootstrap$Popover$stateDecoder);
+	});
+var rundis$elm_bootstrap$Bootstrap$Popover$onHover = F2(
+	function (state, toMsg) {
+		return _List_fromArray(
+			[
+				elm$html$Html$Attributes$class('popover-trigger'),
+				A2(
+				elm$html$Html$Events$on,
+				'mouseenter',
+				A2(rundis$elm_bootstrap$Bootstrap$Popover$toggleState, state, toMsg)),
+				A2(
+				elm$html$Html$Events$on,
+				'mouseleave',
+				A2(rundis$elm_bootstrap$Bootstrap$Popover$forceClose, state, toMsg))
+			]);
+	});
+var rundis$elm_bootstrap$Bootstrap$Popover$Right = {$: 'Right'};
+var rundis$elm_bootstrap$Bootstrap$Popover$right = function (_n0) {
+	var conf = _n0.a;
+	return rundis$elm_bootstrap$Bootstrap$Popover$Config(
+		_Utils_update(
+			conf,
+			{direction: rundis$elm_bootstrap$Bootstrap$Popover$Right}));
+};
+var rundis$elm_bootstrap$Bootstrap$Popover$calculatePos = F2(
+	function (pos, _n0) {
+		var rect = _n0.rect;
+		var offsetWidth = _n0.offsetWidth;
+		var offsetHeight = _n0.offsetHeight;
+		switch (pos.$) {
+			case 'Left':
+				return {
+					arrowLeft: elm$core$Maybe$Nothing,
+					arrowTop: elm$core$Maybe$Just((offsetHeight / 2) - 12),
+					left: (-offsetWidth) - 10,
+					top: (rect.height / 2) - (offsetHeight / 2)
+				};
+			case 'Right':
+				return {
+					arrowLeft: elm$core$Maybe$Nothing,
+					arrowTop: elm$core$Maybe$Just((offsetHeight / 2) - 12),
+					left: rect.width,
+					top: (rect.height / 2) - (offsetHeight / 2)
+				};
+			case 'Top':
+				return {
+					arrowLeft: elm$core$Maybe$Just((offsetWidth / 2) - 12),
+					arrowTop: elm$core$Maybe$Nothing,
+					left: (rect.width / 2) - (offsetWidth / 2),
+					top: (-offsetHeight) - 10
+				};
+			default:
+				return {
+					arrowLeft: elm$core$Maybe$Just((offsetWidth / 2) - 12),
+					arrowTop: elm$core$Maybe$Nothing,
+					left: (rect.width / 2) - (offsetWidth / 2),
+					top: rect.height
+				};
+		}
+	});
+var rundis$elm_bootstrap$Bootstrap$Popover$directionAttr = function (position) {
+	return A2(
+		elm$html$Html$Attributes$attribute,
+		'x-placement',
+		function () {
+			switch (position.$) {
+				case 'Left':
+					return 'left';
+				case 'Right':
+					return 'right';
+				case 'Top':
+					return 'top';
+				default:
+					return 'bottom';
+			}
+		}());
+};
+var rundis$elm_bootstrap$Bootstrap$Popover$positionClass = function (position) {
+	switch (position.$) {
+		case 'Left':
+			return _Utils_Tuple2('bs-popover-left', true);
+		case 'Right':
+			return _Utils_Tuple2('bs-popover-right', true);
+		case 'Top':
+			return _Utils_Tuple2('bs-popover-top', true);
+		default:
+			return _Utils_Tuple2('bs-popover-bottom', true);
+	}
+};
+var rundis$elm_bootstrap$Bootstrap$Popover$popoverView = F2(
+	function (_n0, _n1) {
+		var isActive = _n0.a.isActive;
+		var domState = _n0.a.domState;
+		var conf = _n1.a;
+		var px = function (f) {
+			return elm$core$String$fromFloat(f) + 'px';
+		};
+		var pos = A2(rundis$elm_bootstrap$Bootstrap$Popover$calculatePos, conf.direction, domState);
+		var styles = isActive ? _List_fromArray(
+			[
+				A2(
+				elm$html$Html$Attributes$style,
+				'left',
+				px(pos.left)),
+				A2(
+				elm$html$Html$Attributes$style,
+				'top',
+				px(pos.top)),
+				A2(elm$html$Html$Attributes$style, 'display', 'inline-block'),
+				A2(
+				elm$html$Html$Attributes$style,
+				'width',
+				px(domState.offsetWidth))
+			]) : _List_fromArray(
+			[
+				A2(elm$html$Html$Attributes$style, 'left', '-5000px'),
+				A2(elm$html$Html$Attributes$style, 'top', '-5000px')
+			]);
+		var arrowStyles = A2(
+			elm$core$List$filterMap,
+			elm$core$Basics$identity,
+			_List_fromArray(
+				[
+					A2(
+					elm$core$Maybe$map,
+					function (t) {
+						return A2(
+							elm$html$Html$Attributes$style,
+							'top',
+							px(t));
+					},
+					pos.arrowTop),
+					A2(
+					elm$core$Maybe$map,
+					function (l) {
+						return A2(
+							elm$html$Html$Attributes$style,
+							'left',
+							px(l));
+					},
+					pos.arrowLeft)
+				]));
+		return A2(
+			elm$html$Html$div,
+			_Utils_ap(
+				_List_fromArray(
+					[
+						elm$html$Html$Attributes$classList(
+						_List_fromArray(
+							[
+								_Utils_Tuple2('popover', true),
+								_Utils_Tuple2('fade', true),
+								_Utils_Tuple2('show', isActive),
+								rundis$elm_bootstrap$Bootstrap$Popover$positionClass(conf.direction)
+							])),
+						rundis$elm_bootstrap$Bootstrap$Popover$directionAttr(conf.direction)
+					]),
+				styles),
+			A2(
+				elm$core$List$filterMap,
+				elm$core$Basics$identity,
+				_List_fromArray(
+					[
+						elm$core$Maybe$Just(
+						A2(
+							elm$html$Html$div,
+							A2(
+								elm$core$List$cons,
+								elm$html$Html$Attributes$class('arrow'),
+								arrowStyles),
+							_List_Nil)),
+						A2(
+						elm$core$Maybe$map,
+						function (_n2) {
+							var t = _n2.a;
+							return t;
+						},
+						conf.title),
+						A2(
+						elm$core$Maybe$map,
+						function (_n3) {
+							var c = _n3.a;
+							return c;
+						},
+						conf.content)
+					])));
+	});
+var rundis$elm_bootstrap$Bootstrap$Popover$view = F2(
+	function (state, conf) {
+		var triggerElement = conf.a.triggerElement;
+		return A2(
+			elm$html$Html$div,
+			_List_fromArray(
+				[
+					A2(elm$html$Html$Attributes$style, 'position', 'relative'),
+					A2(elm$html$Html$Attributes$style, 'display', 'inline-block')
+				]),
+			_List_fromArray(
+				[
+					triggerElement,
+					A2(rundis$elm_bootstrap$Bootstrap$Popover$popoverView, state, conf)
+				]));
+	});
 var author$project$Main$viewField = F2(
 	function (f, msg) {
 		return _List_fromArray(
@@ -5773,7 +7144,29 @@ var author$project$Main$viewField = F2(
 				_List_Nil,
 				_List_fromArray(
 					[
-						elm$html$Html$text(f.name)
+						elm$html$Html$text(f.name),
+						A2(
+						rundis$elm_bootstrap$Bootstrap$Popover$view,
+						f.popoverState,
+						A3(
+							rundis$elm_bootstrap$Bootstrap$Popover$content,
+							_List_Nil,
+							_List_fromArray(
+								[
+									elm$html$Html$text(f.popoverText)
+								]),
+							rundis$elm_bootstrap$Bootstrap$Popover$right(
+								rundis$elm_bootstrap$Bootstrap$Popover$config(
+									A2(
+										rundis$elm_bootstrap$Bootstrap$Badge$badgeInfo,
+										A2(
+											rundis$elm_bootstrap$Bootstrap$Popover$onHover,
+											f.popoverState,
+											author$project$Main$PopoverMsg(f)),
+										_List_fromArray(
+											[
+												elm$html$Html$text('?')
+											]))))))
 					])),
 				A2(
 				rundis$elm_bootstrap$Bootstrap$Form$col,
@@ -5805,31 +7198,6 @@ var author$project$Main$viewField = F2(
 					}()
 					]))
 			]);
-	});
-var elm$core$List$append = F2(
-	function (xs, ys) {
-		if (!ys.b) {
-			return xs;
-		} else {
-			return A3(elm$core$List$foldr, elm$core$List$cons, ys, xs);
-		}
-	});
-var elm$core$List$concat = function (lists) {
-	return A3(elm$core$List$foldr, elm$core$List$append, _List_Nil, lists);
-};
-var elm$core$List$map = F2(
-	function (f, xs) {
-		return A3(
-			elm$core$List$foldr,
-			F2(
-				function (x, acc) {
-					return A2(
-						elm$core$List$cons,
-						f(x),
-						acc);
-				}),
-			_List_Nil,
-			xs);
 	});
 var rundis$elm_bootstrap$Bootstrap$General$Internal$XS = {$: 'XS'};
 var rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col = {$: 'Col'};
@@ -6088,15 +7456,6 @@ var rundis$elm_bootstrap$Bootstrap$Grid$Internal$applyColOption = F2(
 					{
 						textAlign: elm$core$Maybe$Just(align)
 					});
-		}
-	});
-var elm$core$Maybe$withDefault = F2(
-	function (_default, maybe) {
-		if (maybe.$ === 'Just') {
-			var value = maybe.a;
-			return value;
-		} else {
-			return _default;
 		}
 	});
 var rundis$elm_bootstrap$Bootstrap$Grid$Internal$columnCountOption = function (size) {
@@ -6616,6 +7975,31 @@ var rundis$elm_bootstrap$Bootstrap$Form$row = F2(
 				rundis$elm_bootstrap$Bootstrap$Grid$Internal$rowAttributes(options)),
 			A2(elm$core$List$map, rundis$elm_bootstrap$Bootstrap$Form$renderCol, cols));
 	});
+var author$project$Main$viewBuyerForm = function (model) {
+	return A2(
+		rundis$elm_bootstrap$Bootstrap$Form$row,
+		_List_Nil,
+		elm$core$List$concat(
+			_List_fromArray(
+				[
+					A2(author$project$Main$viewField, model.f_twd, author$project$Main$ChangeBuyerDeposit),
+					A2(author$project$Main$viewField, model.f_tb, author$project$Main$ChangeBuyerBond),
+					_List_fromArray(
+					[
+						A2(rundis$elm_bootstrap$Bootstrap$Form$col, _List_Nil, _List_Nil),
+						A2(rundis$elm_bootstrap$Bootstrap$Form$col, _List_Nil, _List_Nil)
+					])
+				])));
+};
+var author$project$Main$ChangeContractTerm = function (a) {
+	return {$: 'ChangeContractTerm', a: a};
+};
+var author$project$Main$ChangeSellerEquity = function (a) {
+	return {$: 'ChangeSellerEquity', a: a};
+};
+var author$project$Main$ChangeSellerMortgage = function (a) {
+	return {$: 'ChangeSellerMortgage', a: a};
+};
 var author$project$Main$viewContractForm = function (model) {
 	return A2(
 		rundis$elm_bootstrap$Bootstrap$Form$row,
@@ -6624,12 +8008,8 @@ var author$project$Main$viewContractForm = function (model) {
 			_List_fromArray(
 				[
 					A2(author$project$Main$viewField, model.f_ct, author$project$Main$ChangeContractTerm),
-					A2(author$project$Main$viewField, model.f_cd, author$project$Main$ChangeContractDeposit),
-					_List_fromArray(
-					[
-						A2(rundis$elm_bootstrap$Bootstrap$Form$col, _List_Nil, _List_Nil),
-						A2(rundis$elm_bootstrap$Bootstrap$Form$col, _List_Nil, _List_Nil)
-					])
+					A2(author$project$Main$viewField, model.f_se, author$project$Main$ChangeSellerEquity),
+					A2(author$project$Main$viewField, model.f_sm, author$project$Main$ChangeSellerMortgage)
 				])));
 };
 var author$project$Main$ChangeHouseExtras = function (a) {
@@ -6678,8 +8058,8 @@ var author$project$Main$viewLoanForm = function (model) {
 var author$project$Main$ChangeInsurance = function (a) {
 	return {$: 'ChangeInsurance', a: a};
 };
-var author$project$Main$ChangeTax = function (a) {
-	return {$: 'ChangeTax', a: a};
+var author$project$Main$ChangeRates = function (a) {
+	return {$: 'ChangeRates', a: a};
 };
 var author$project$Main$viewMaintenanceForm = function (model) {
 	return A2(
@@ -6688,31 +8068,8 @@ var author$project$Main$viewMaintenanceForm = function (model) {
 		elm$core$List$concat(
 			_List_fromArray(
 				[
-					A2(author$project$Main$viewField, model.f_tax, author$project$Main$ChangeTax),
+					A2(author$project$Main$viewField, model.f_rates, author$project$Main$ChangeRates),
 					A2(author$project$Main$viewField, model.f_insur, author$project$Main$ChangeInsurance),
-					_List_fromArray(
-					[
-						A2(rundis$elm_bootstrap$Bootstrap$Form$col, _List_Nil, _List_Nil),
-						A2(rundis$elm_bootstrap$Bootstrap$Form$col, _List_Nil, _List_Nil)
-					])
-				])));
-};
-var author$project$Main$ChangeTenantDeposit = function (a) {
-	return {$: 'ChangeTenantDeposit', a: a};
-};
-var author$project$Main$viewTenantForm = function (model) {
-	return A2(
-		rundis$elm_bootstrap$Bootstrap$Form$row,
-		_List_Nil,
-		elm$core$List$concat(
-			_List_fromArray(
-				[
-					A2(author$project$Main$viewField, model.f_twd, author$project$Main$ChangeTenantDeposit),
-					_List_fromArray(
-					[
-						A2(rundis$elm_bootstrap$Bootstrap$Form$col, _List_Nil, _List_Nil),
-						A2(rundis$elm_bootstrap$Bootstrap$Form$col, _List_Nil, _List_Nil)
-					]),
 					_List_fromArray(
 					[
 						A2(rundis$elm_bootstrap$Bootstrap$Form$col, _List_Nil, _List_Nil),
@@ -6735,13 +8092,9 @@ var author$project$Main$viewForm = function (model) {
 				author$project$Main$viewLoanForm(model),
 				author$project$Main$viewContractForm(model),
 				author$project$Main$viewMaintenanceForm(model),
-				author$project$Main$viewTenantForm(model)
+				author$project$Main$viewBuyerForm(model)
 			]));
 };
-var author$project$Main$pluralize = F3(
-	function (singular, plural, count) {
-		return (count === 1) ? ('1 ' + singular) : (elm$core$String$fromInt(count) + (' ' + plural));
-	});
 var author$project$Loan$w_interest = function (loan) {
 	return author$project$Loan$w_interest_rate(loan) * loan.amount;
 };
@@ -6749,650 +8102,6 @@ var author$project$Loan$w_principal = F2(
 	function (loan, pay) {
 		return pay - author$project$Loan$w_interest(loan);
 	});
-var author$project$Loan$afterPay = F2(
-	function (loan, pay) {
-		var wp = A2(author$project$Loan$w_principal, loan, pay);
-		return _Utils_update(
-			loan,
-			{amount: loan.amount - wp, term: loan.term - 1});
-	});
-var author$project$Loan$atNthIncrement = F3(
-	function (loan, n, pay) {
-		atNthIncrement:
-		while (true) {
-			if (n === 1) {
-				return loan;
-			} else {
-				var $temp$loan = A2(author$project$Loan$afterPay, loan, pay),
-					$temp$n = n - 1,
-					$temp$pay = pay;
-				loan = $temp$loan;
-				n = $temp$n;
-				pay = $temp$pay;
-				continue atNthIncrement;
-			}
-		}
-	});
-var author$project$Loan$amortBegBalance = F2(
-	function (loan, n) {
-		var new_loan = A3(
-			author$project$Loan$atNthIncrement,
-			loan,
-			n,
-			author$project$Loan$payment(loan));
-		return new_loan.amount;
-	});
-var author$project$Main$remainingLoan = function (model) {
-	return A2(author$project$Loan$amortBegBalance, model.loan, 52 * model.c_ct);
-};
-var author$project$Main$roiAmount = function (model) {
-	return model.loan.amount - author$project$Main$remainingLoan(model);
-};
-var author$project$Main$roiPercent = function (model) {
-	return author$project$Main$roiAmount(model) / model.c_cd;
-};
-var elm$core$Basics$ge = _Utils_ge;
-var elm$core$Basics$not = _Basics_not;
-var elm$core$Basics$abs = function (n) {
-	return (n < 0) ? (-n) : n;
-};
-var elm$core$Basics$isInfinite = _Basics_isInfinite;
-var elm$core$Basics$isNaN = _Basics_isNaN;
-var elm$core$String$fromFloat = _String_fromNumber;
-var elm$core$String$length = _String_length;
-var elm$core$String$cons = _String_cons;
-var elm$core$String$fromChar = function (_char) {
-	return A2(elm$core$String$cons, _char, '');
-};
-var elm$core$Bitwise$and = _Bitwise_and;
-var elm$core$Bitwise$shiftRightBy = _Bitwise_shiftRightBy;
-var elm$core$String$repeatHelp = F3(
-	function (n, chunk, result) {
-		return (n <= 0) ? result : A3(
-			elm$core$String$repeatHelp,
-			n >> 1,
-			_Utils_ap(chunk, chunk),
-			(!(n & 1)) ? result : _Utils_ap(result, chunk));
-	});
-var elm$core$String$repeat = F2(
-	function (n, chunk) {
-		return A3(elm$core$String$repeatHelp, n, chunk, '');
-	});
-var elm$core$String$padRight = F3(
-	function (n, _char, string) {
-		return _Utils_ap(
-			string,
-			A2(
-				elm$core$String$repeat,
-				n - elm$core$String$length(string),
-				elm$core$String$fromChar(_char)));
-	});
-var elm$core$String$reverse = _String_reverse;
-var elm$core$String$slice = _String_slice;
-var elm$core$Basics$neq = _Utils_notEqual;
-var elm$core$List$any = F2(
-	function (isOkay, list) {
-		any:
-		while (true) {
-			if (!list.b) {
-				return false;
-			} else {
-				var x = list.a;
-				var xs = list.b;
-				if (isOkay(x)) {
-					return true;
-				} else {
-					var $temp$isOkay = isOkay,
-						$temp$list = xs;
-					isOkay = $temp$isOkay;
-					list = $temp$list;
-					continue any;
-				}
-			}
-		}
-	});
-var elm$core$String$foldr = _String_foldr;
-var elm$core$String$toList = function (string) {
-	return A3(elm$core$String$foldr, elm$core$List$cons, _List_Nil, string);
-};
-var myrho$elm_round$Round$addSign = F2(
-	function (signed, str) {
-		var isNotZero = A2(
-			elm$core$List$any,
-			function (c) {
-				return (!_Utils_eq(
-					c,
-					_Utils_chr('0'))) && (!_Utils_eq(
-					c,
-					_Utils_chr('.')));
-			},
-			elm$core$String$toList(str));
-		return _Utils_ap(
-			(signed && isNotZero) ? '-' : '',
-			str);
-	});
-var elm$core$Char$fromCode = _Char_fromCode;
-var myrho$elm_round$Round$increaseNum = function (_n0) {
-	var head = _n0.a;
-	var tail = _n0.b;
-	if (_Utils_eq(
-		head,
-		_Utils_chr('9'))) {
-		var _n1 = elm$core$String$uncons(tail);
-		if (_n1.$ === 'Nothing') {
-			return '01';
-		} else {
-			var headtail = _n1.a;
-			return A2(
-				elm$core$String$cons,
-				_Utils_chr('0'),
-				myrho$elm_round$Round$increaseNum(headtail));
-		}
-	} else {
-		var c = elm$core$Char$toCode(head);
-		return ((c >= 48) && (c < 57)) ? A2(
-			elm$core$String$cons,
-			elm$core$Char$fromCode(c + 1),
-			tail) : '0';
-	}
-};
-var myrho$elm_round$Round$splitComma = function (str) {
-	var _n0 = A2(elm$core$String$split, '.', str);
-	if (_n0.b) {
-		if (_n0.b.b) {
-			var before = _n0.a;
-			var _n1 = _n0.b;
-			var after = _n1.a;
-			return _Utils_Tuple2(before, after);
-		} else {
-			var before = _n0.a;
-			return _Utils_Tuple2(before, '0');
-		}
-	} else {
-		return _Utils_Tuple2('0', '0');
-	}
-};
-var elm$core$String$dropLeft = F2(
-	function (n, string) {
-		return (n < 1) ? string : A3(
-			elm$core$String$slice,
-			n,
-			elm$core$String$length(string),
-			string);
-	});
-var elm$core$String$startsWith = _String_startsWith;
-var elm$core$Tuple$mapFirst = F2(
-	function (func, _n0) {
-		var x = _n0.a;
-		var y = _n0.b;
-		return _Utils_Tuple2(
-			func(x),
-			y);
-	});
-var myrho$elm_round$Round$toDecimal = function (fl) {
-	var _n0 = A2(
-		elm$core$String$split,
-		'e',
-		elm$core$String$fromFloat(
-			elm$core$Basics$abs(fl)));
-	if (_n0.b) {
-		if (_n0.b.b) {
-			var num = _n0.a;
-			var _n1 = _n0.b;
-			var exp = _n1.a;
-			var e = A2(
-				elm$core$Maybe$withDefault,
-				0,
-				elm$core$String$toInt(
-					A2(elm$core$String$startsWith, '+', exp) ? A2(elm$core$String$dropLeft, 1, exp) : exp));
-			var _n2 = myrho$elm_round$Round$splitComma(num);
-			var before = _n2.a;
-			var after = _n2.b;
-			var total = _Utils_ap(before, after);
-			var zeroed = (e < 0) ? A2(
-				elm$core$Maybe$withDefault,
-				'0',
-				A2(
-					elm$core$Maybe$map,
-					function (_n3) {
-						var a = _n3.a;
-						var b = _n3.b;
-						return a + ('.' + b);
-					},
-					A2(
-						elm$core$Maybe$map,
-						elm$core$Tuple$mapFirst(elm$core$String$fromChar),
-						elm$core$String$uncons(
-							_Utils_ap(
-								A2(
-									elm$core$String$repeat,
-									elm$core$Basics$abs(e),
-									'0'),
-								total))))) : A3(
-				elm$core$String$padRight,
-				e + 1,
-				_Utils_chr('0'),
-				total);
-			return _Utils_ap(
-				(fl < 0) ? '-' : '',
-				zeroed);
-		} else {
-			var num = _n0.a;
-			return _Utils_ap(
-				(fl < 0) ? '-' : '',
-				num);
-		}
-	} else {
-		return '';
-	}
-};
-var myrho$elm_round$Round$roundFun = F3(
-	function (functor, s, fl) {
-		if (elm$core$Basics$isInfinite(fl) || elm$core$Basics$isNaN(fl)) {
-			return elm$core$String$fromFloat(fl);
-		} else {
-			var signed = fl < 0;
-			var _n0 = myrho$elm_round$Round$splitComma(
-				myrho$elm_round$Round$toDecimal(
-					elm$core$Basics$abs(fl)));
-			var before = _n0.a;
-			var after = _n0.b;
-			var r = elm$core$String$length(before) + s;
-			var normalized = _Utils_ap(
-				A2(elm$core$String$repeat, (-r) + 1, '0'),
-				A3(
-					elm$core$String$padRight,
-					r,
-					_Utils_chr('0'),
-					_Utils_ap(before, after)));
-			var totalLen = elm$core$String$length(normalized);
-			var roundDigitIndex = A2(elm$core$Basics$max, 1, r);
-			var increase = A2(
-				functor,
-				signed,
-				A3(elm$core$String$slice, roundDigitIndex, totalLen, normalized));
-			var remains = A3(elm$core$String$slice, 0, roundDigitIndex, normalized);
-			var num = increase ? elm$core$String$reverse(
-				A2(
-					elm$core$Maybe$withDefault,
-					'1',
-					A2(
-						elm$core$Maybe$map,
-						myrho$elm_round$Round$increaseNum,
-						elm$core$String$uncons(
-							elm$core$String$reverse(remains))))) : remains;
-			var numLen = elm$core$String$length(num);
-			var numZeroed = (num === '0') ? num : ((s <= 0) ? _Utils_ap(
-				num,
-				A2(
-					elm$core$String$repeat,
-					elm$core$Basics$abs(s),
-					'0')) : ((_Utils_cmp(
-				s,
-				elm$core$String$length(after)) < 0) ? (A3(elm$core$String$slice, 0, numLen - s, num) + ('.' + A3(elm$core$String$slice, numLen - s, numLen, num))) : _Utils_ap(
-				before + '.',
-				A3(
-					elm$core$String$padRight,
-					s,
-					_Utils_chr('0'),
-					after))));
-			return A2(myrho$elm_round$Round$addSign, signed, numZeroed);
-		}
-	});
-var myrho$elm_round$Round$round = myrho$elm_round$Round$roundFun(
-	F2(
-		function (signed, str) {
-			var _n0 = elm$core$String$uncons(str);
-			if (_n0.$ === 'Nothing') {
-				return false;
-			} else {
-				if ('5' === _n0.a.a.valueOf()) {
-					if (_n0.a.b === '') {
-						var _n1 = _n0.a;
-						return !signed;
-					} else {
-						var _n2 = _n0.a;
-						return true;
-					}
-				} else {
-					var _n3 = _n0.a;
-					var _int = _n3.a;
-					return function (i) {
-						return ((i > 53) && signed) || ((i >= 53) && (!signed));
-					}(
-						elm$core$Char$toCode(_int));
-				}
-			}
-		}));
-var author$project$Main$viewAsDollar = function (f) {
-	return '$ ' + A2(myrho$elm_round$Round$round, 2, f);
-};
-var author$project$Main$viewAsPercent = function (f) {
-	return A2(myrho$elm_round$Round$round, 2, 100 * f) + ' %';
-};
-var elm$html$Html$h3 = _VirtualDom_node('h3');
-var elm$html$Html$h4 = _VirtualDom_node('h4');
-var elm$html$Html$li = _VirtualDom_node('li');
-var elm$html$Html$ul = _VirtualDom_node('ul');
-var rundis$elm_bootstrap$Bootstrap$Alert$Shown = {$: 'Shown'};
-var rundis$elm_bootstrap$Bootstrap$Alert$Config = function (a) {
-	return {$: 'Config', a: a};
-};
-var rundis$elm_bootstrap$Bootstrap$Alert$attrs = F2(
-	function (attributes, _n0) {
-		var configRec = _n0.a;
-		return rundis$elm_bootstrap$Bootstrap$Alert$Config(
-			_Utils_update(
-				configRec,
-				{attributes: attributes}));
-	});
-var rundis$elm_bootstrap$Bootstrap$Alert$children = F2(
-	function (children_, _n0) {
-		var configRec = _n0.a;
-		return rundis$elm_bootstrap$Bootstrap$Alert$Config(
-			_Utils_update(
-				configRec,
-				{children: children_}));
-	});
-var rundis$elm_bootstrap$Bootstrap$Internal$Role$Secondary = {$: 'Secondary'};
-var rundis$elm_bootstrap$Bootstrap$Alert$config = rundis$elm_bootstrap$Bootstrap$Alert$Config(
-	{attributes: _List_Nil, children: _List_Nil, dismissable: elm$core$Maybe$Nothing, role: rundis$elm_bootstrap$Bootstrap$Internal$Role$Secondary, visibility: rundis$elm_bootstrap$Bootstrap$Alert$Shown, withAnimation: false});
-var rundis$elm_bootstrap$Bootstrap$Alert$role = F2(
-	function (role_, _n0) {
-		var configRec = _n0.a;
-		return rundis$elm_bootstrap$Bootstrap$Alert$Config(
-			_Utils_update(
-				configRec,
-				{role: role_}));
-	});
-var elm$html$Html$button = _VirtualDom_node('button');
-var elm$html$Html$span = _VirtualDom_node('span');
-var elm$virtual_dom$VirtualDom$attribute = F2(
-	function (key, value) {
-		return A2(
-			_VirtualDom_attribute,
-			_VirtualDom_noOnOrFormAction(key),
-			_VirtualDom_noJavaScriptOrHtmlUri(value));
-	});
-var elm$html$Html$Attributes$attribute = elm$virtual_dom$VirtualDom$attribute;
-var elm$virtual_dom$VirtualDom$Normal = function (a) {
-	return {$: 'Normal', a: a};
-};
-var elm$html$Html$Events$on = F2(
-	function (event, decoder) {
-		return A2(
-			elm$virtual_dom$VirtualDom$on,
-			event,
-			elm$virtual_dom$VirtualDom$Normal(decoder));
-	});
-var elm$html$Html$Events$onClick = function (msg) {
-	return A2(
-		elm$html$Html$Events$on,
-		'click',
-		elm$json$Json$Decode$succeed(msg));
-};
-var rundis$elm_bootstrap$Bootstrap$Alert$Closed = {$: 'Closed'};
-var rundis$elm_bootstrap$Bootstrap$Alert$StartClose = {$: 'StartClose'};
-var rundis$elm_bootstrap$Bootstrap$Alert$clickHandler = F2(
-	function (visibility, configRec) {
-		var handleClick = F2(
-			function (viz, toMsg) {
-				return elm$html$Html$Events$onClick(
-					toMsg(viz));
-			});
-		var _n0 = configRec.dismissable;
-		if (_n0.$ === 'Just') {
-			var dismissMsg = _n0.a;
-			return _List_fromArray(
-				[
-					configRec.withAnimation ? A2(handleClick, rundis$elm_bootstrap$Bootstrap$Alert$StartClose, dismissMsg) : A2(handleClick, rundis$elm_bootstrap$Bootstrap$Alert$Closed, dismissMsg)
-				]);
-		} else {
-			return _List_Nil;
-		}
-	});
-var rundis$elm_bootstrap$Bootstrap$Alert$injectButton = F2(
-	function (btn, children_) {
-		if (children_.b) {
-			var head = children_.a;
-			var tail = children_.b;
-			return A2(
-				elm$core$List$cons,
-				head,
-				A2(elm$core$List$cons, btn, tail));
-		} else {
-			return _List_fromArray(
-				[btn]);
-		}
-	});
-var rundis$elm_bootstrap$Bootstrap$Alert$isDismissable = function (configRec) {
-	var _n0 = configRec.dismissable;
-	if (_n0.$ === 'Just') {
-		return true;
-	} else {
-		return false;
-	}
-};
-var rundis$elm_bootstrap$Bootstrap$Alert$maybeAddDismissButton = F3(
-	function (visibilty, configRec, children_) {
-		return rundis$elm_bootstrap$Bootstrap$Alert$isDismissable(configRec) ? A2(
-			rundis$elm_bootstrap$Bootstrap$Alert$injectButton,
-			A2(
-				elm$html$Html$button,
-				_Utils_ap(
-					_List_fromArray(
-						[
-							elm$html$Html$Attributes$type_('button'),
-							elm$html$Html$Attributes$class('close'),
-							A2(elm$html$Html$Attributes$attribute, 'aria-label', 'close')
-						]),
-					A2(rundis$elm_bootstrap$Bootstrap$Alert$clickHandler, visibilty, configRec)),
-				_List_fromArray(
-					[
-						A2(
-						elm$html$Html$span,
-						_List_fromArray(
-							[
-								A2(elm$html$Html$Attributes$attribute, 'aria-hidden', 'true')
-							]),
-						_List_fromArray(
-							[
-								elm$html$Html$text('×')
-							]))
-					])),
-			children_) : children_;
-	});
-var elm$core$List$filter = F2(
-	function (isGood, list) {
-		return A3(
-			elm$core$List$foldr,
-			F2(
-				function (x, xs) {
-					return isGood(x) ? A2(elm$core$List$cons, x, xs) : xs;
-				}),
-			_List_Nil,
-			list);
-	});
-var elm$core$Tuple$second = function (_n0) {
-	var y = _n0.b;
-	return y;
-};
-var elm$html$Html$Attributes$classList = function (classes) {
-	return elm$html$Html$Attributes$class(
-		A2(
-			elm$core$String$join,
-			' ',
-			A2(
-				elm$core$List$map,
-				elm$core$Tuple$first,
-				A2(elm$core$List$filter, elm$core$Tuple$second, classes))));
-};
-var elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var elm$html$Html$Attributes$style = elm$virtual_dom$VirtualDom$style;
-var rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass = F2(
-	function (prefix, role) {
-		return elm$html$Html$Attributes$class(
-			prefix + ('-' + function () {
-				switch (role.$) {
-					case 'Primary':
-						return 'primary';
-					case 'Secondary':
-						return 'secondary';
-					case 'Success':
-						return 'success';
-					case 'Info':
-						return 'info';
-					case 'Warning':
-						return 'warning';
-					case 'Danger':
-						return 'danger';
-					case 'Light':
-						return 'light';
-					default:
-						return 'dark';
-				}
-			}()));
-	});
-var rundis$elm_bootstrap$Bootstrap$Alert$viewAttributes = F2(
-	function (visibility, configRec) {
-		var visibiltyAttributes = _Utils_eq(visibility, rundis$elm_bootstrap$Bootstrap$Alert$Closed) ? _List_fromArray(
-			[
-				A2(elm$html$Html$Attributes$style, 'display', 'none')
-			]) : _List_Nil;
-		var animationAttributes = function () {
-			if (configRec.withAnimation) {
-				var _n0 = configRec.dismissable;
-				if (_n0.$ === 'Just') {
-					var dismissMsg = _n0.a;
-					return _List_fromArray(
-						[
-							A2(
-							elm$html$Html$Events$on,
-							'transitionend',
-							elm$json$Json$Decode$succeed(
-								dismissMsg(rundis$elm_bootstrap$Bootstrap$Alert$Closed)))
-						]);
-				} else {
-					return _List_Nil;
-				}
-			} else {
-				return _List_Nil;
-			}
-		}();
-		var alertAttributes = _List_fromArray(
-			[
-				A2(elm$html$Html$Attributes$attribute, 'role', 'alert'),
-				elm$html$Html$Attributes$classList(
-				_List_fromArray(
-					[
-						_Utils_Tuple2('alert', true),
-						_Utils_Tuple2(
-						'alert-dismissible',
-						rundis$elm_bootstrap$Bootstrap$Alert$isDismissable(configRec)),
-						_Utils_Tuple2('fade', configRec.withAnimation),
-						_Utils_Tuple2(
-						'show',
-						_Utils_eq(visibility, rundis$elm_bootstrap$Bootstrap$Alert$Shown))
-					])),
-				A2(rundis$elm_bootstrap$Bootstrap$Internal$Role$toClass, 'alert', configRec.role)
-			]);
-		return elm$core$List$concat(
-			_List_fromArray(
-				[configRec.attributes, alertAttributes, visibiltyAttributes, animationAttributes]));
-	});
-var rundis$elm_bootstrap$Bootstrap$Alert$view = F2(
-	function (visibility, _n0) {
-		var configRec = _n0.a;
-		return A2(
-			elm$html$Html$div,
-			A2(rundis$elm_bootstrap$Bootstrap$Alert$viewAttributes, visibility, configRec),
-			A3(rundis$elm_bootstrap$Bootstrap$Alert$maybeAddDismissButton, visibility, configRec, configRec.children));
-	});
-var rundis$elm_bootstrap$Bootstrap$Alert$simple = F3(
-	function (role_, attributes, children_) {
-		return A2(
-			rundis$elm_bootstrap$Bootstrap$Alert$view,
-			rundis$elm_bootstrap$Bootstrap$Alert$Shown,
-			A2(
-				rundis$elm_bootstrap$Bootstrap$Alert$children,
-				children_,
-				A2(
-					rundis$elm_bootstrap$Bootstrap$Alert$attrs,
-					attributes,
-					A2(rundis$elm_bootstrap$Bootstrap$Alert$role, role_, rundis$elm_bootstrap$Bootstrap$Alert$config))));
-	});
-var rundis$elm_bootstrap$Bootstrap$Internal$Role$Success = {$: 'Success'};
-var rundis$elm_bootstrap$Bootstrap$Alert$simpleSuccess = rundis$elm_bootstrap$Bootstrap$Alert$simple(rundis$elm_bootstrap$Bootstrap$Internal$Role$Success);
-var author$project$Main$viewLandlord = function (model) {
-	return A2(
-		rundis$elm_bootstrap$Bootstrap$Alert$simpleSuccess,
-		_List_Nil,
-		_List_fromArray(
-			[
-				A2(
-				elm$html$Html$h3,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('Landlord')
-					])),
-				A2(
-				elm$html$Html$ul,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								elm$html$Html$text(
-								'Borrows ' + author$project$Main$viewAsDollar(model.loan.amount))
-							])),
-						A2(
-						elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								elm$html$Html$text(
-								'Pays ' + (author$project$Main$viewAsDollar(model.c_pay) + ' per week'))
-							]))
-					])),
-				A2(
-				elm$html$Html$h4,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text(
-						'After ' + A3(author$project$Main$pluralize, 'year', 'years', model.c_ct))
-					])),
-				A2(
-				elm$html$Html$ul,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								elm$html$Html$text(
-								'Left to pay ' + author$project$Main$viewAsDollar(
-									author$project$Main$remainingLoan(model)))
-							])),
-						A2(
-						elm$html$Html$li,
-						_List_Nil,
-						_List_fromArray(
-							[
-								elm$html$Html$text(
-								'ROI ' + (author$project$Main$viewAsDollar(
-									author$project$Main$roiAmount(model)) + (' (' + (author$project$Main$viewAsPercent(
-									author$project$Main$roiPercent(model)) + ')'))))
-							]))
-					]))
-			]));
-};
 var author$project$Loan$interest_ = F2(
 	function (loan, pay) {
 		var wp = A2(author$project$Loan$w_principal, loan, pay);
@@ -7446,7 +8155,7 @@ var author$project$Main$viewLoanCalculus = function (model) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						elm$html$Html$text('Loan ')
+						elm$html$Html$text('Home Loan')
 					])),
 				A2(
 				elm$html$Html$dl,
@@ -7480,26 +8189,53 @@ var author$project$Main$viewLoanCalculus = function (model) {
 						])))
 			]));
 };
-var author$project$Main$builtDeposit = function (model) {
-	return (model.c_twd * 52) * model.c_ct;
+var author$project$Main$lvrSeller = function (model) {
+	return (model.loan.amount + model.c_sm) / (model.c_se + model.c_hv);
 };
-var author$project$Main$houseCapitalGain = function (model) {
-	return (model.c_hv * A2(elm$core$Basics$pow, 1 + model.c_hr, model.c_ct)) - model.c_hv;
+var author$project$Loan$afterPay = F2(
+	function (loan, pay) {
+		var wp = A2(author$project$Loan$w_principal, loan, pay);
+		return _Utils_update(
+			loan,
+			{amount: loan.amount - wp, term: loan.term - 1});
+	});
+var author$project$Loan$atNthIncrement = F3(
+	function (loan, n, pay) {
+		atNthIncrement:
+		while (true) {
+			if (n === 1) {
+				return loan;
+			} else {
+				var $temp$loan = A2(author$project$Loan$afterPay, loan, pay),
+					$temp$n = n - 1,
+					$temp$pay = pay;
+				loan = $temp$loan;
+				n = $temp$n;
+				pay = $temp$pay;
+				continue atNthIncrement;
+			}
+		}
+	});
+var author$project$Loan$amortBegBalance = F2(
+	function (loan, n) {
+		var new_loan = A3(
+			author$project$Loan$atNthIncrement,
+			loan,
+			n,
+			author$project$Loan$payment(loan));
+		return new_loan.amount;
+	});
+var author$project$Main$remainingLoan = function (model) {
+	return A2(author$project$Loan$amortBegBalance, model.loan, 52 * model.c_ct);
 };
-var author$project$Main$totalDeposit = function (model) {
-	return author$project$Main$builtDeposit(model) + author$project$Main$houseCapitalGain(model);
+var author$project$Main$roiAmount = function (model) {
+	return model.loan.amount - author$project$Main$remainingLoan(model);
 };
-var author$project$Main$depositRatio = function (model) {
-	return author$project$Main$totalDeposit(model) / model.c_hv;
-};
-var author$project$Main$weeklySpending = function (model) {
-	return model.c_pay + model.c_twd;
-};
-var rundis$elm_bootstrap$Bootstrap$Internal$Role$Info = {$: 'Info'};
-var rundis$elm_bootstrap$Bootstrap$Alert$simpleInfo = rundis$elm_bootstrap$Bootstrap$Alert$simple(rundis$elm_bootstrap$Bootstrap$Internal$Role$Info);
-var author$project$Main$viewTenant = function (model) {
+var rundis$elm_bootstrap$Bootstrap$Internal$Role$Success = {$: 'Success'};
+var rundis$elm_bootstrap$Bootstrap$Alert$simpleSuccess = rundis$elm_bootstrap$Bootstrap$Alert$simple(rundis$elm_bootstrap$Bootstrap$Internal$Role$Success);
+var author$project$Main$viewSeller = function (model) {
 	return A2(
-		rundis$elm_bootstrap$Bootstrap$Alert$simpleInfo,
+		rundis$elm_bootstrap$Bootstrap$Alert$simpleSuccess,
 		_List_Nil,
 		_List_fromArray(
 			[
@@ -7508,7 +8244,7 @@ var author$project$Main$viewTenant = function (model) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						elm$html$Html$text('Tenant')
+						elm$html$Html$text('Seller')
 					])),
 				A2(
 				elm$html$Html$ul,
@@ -7520,9 +8256,8 @@ var author$project$Main$viewTenant = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								elm$html$Html$text(
-								'Spends ' + (author$project$Main$viewAsDollar(
-									author$project$Main$weeklySpending(model)) + ' per week'))
+								author$project$Main$viewAsLvr(
+								author$project$Main$lvrSeller(model))
 							])),
 						A2(
 						elm$html$Html$li,
@@ -7530,7 +8265,7 @@ var author$project$Main$viewTenant = function (model) {
 						_List_fromArray(
 							[
 								elm$html$Html$text(
-								'Including ' + (author$project$Main$viewAsDollar(model.c_twd) + ' deposit per week'))
+								'Pays ' + (author$project$Main$viewAsDollar(model.c_pay) + ' per week'))
 							]))
 					])),
 				A2(
@@ -7552,32 +8287,8 @@ var author$project$Main$viewTenant = function (model) {
 						_List_fromArray(
 							[
 								elm$html$Html$text(
-								'Total deposit of ' + author$project$Main$viewAsDollar(
-									author$project$Main$totalDeposit(model))),
-								A2(
-								elm$html$Html$ul,
-								_List_Nil,
-								_List_fromArray(
-									[
-										A2(
-										elm$html$Html$li,
-										_List_Nil,
-										_List_fromArray(
-											[
-												elm$html$Html$text(
-												'Cash deposit of ' + author$project$Main$viewAsDollar(
-													author$project$Main$builtDeposit(model)))
-											])),
-										A2(
-										elm$html$Html$li,
-										_List_Nil,
-										_List_fromArray(
-											[
-												elm$html$Html$text(
-												'House value increased by ' + author$project$Main$viewAsDollar(
-													author$project$Main$houseCapitalGain(model)))
-											]))
-									]))
+								'Left to pay ' + author$project$Main$viewAsDollar(
+									author$project$Main$remainingLoan(model)))
 							])),
 						A2(
 						elm$html$Html$li,
@@ -7585,8 +8296,8 @@ var author$project$Main$viewTenant = function (model) {
 						_List_fromArray(
 							[
 								elm$html$Html$text(
-								'Which represents ' + (author$project$Main$viewAsPercent(
-									author$project$Main$depositRatio(model)) + ' of the required loan'))
+								'ROI ' + author$project$Main$viewAsDollar(
+									author$project$Main$roiAmount(model)))
 							]))
 					]))
 			]));
@@ -7646,7 +8357,7 @@ var rundis$elm_bootstrap$Bootstrap$Grid$row = F2(
 			rundis$elm_bootstrap$Bootstrap$Grid$Internal$rowAttributes(options),
 			A2(elm$core$List$map, rundis$elm_bootstrap$Bootstrap$Grid$renderCol, cols));
 	});
-var rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col2 = {$: 'Col2'};
+var rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col3 = {$: 'Col3'};
 var rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColWidth = function (a) {
 	return {$: 'ColWidth', a: a};
 };
@@ -7655,9 +8366,9 @@ var rundis$elm_bootstrap$Bootstrap$Grid$Internal$width = F2(
 		return rundis$elm_bootstrap$Bootstrap$Grid$Internal$ColWidth(
 			A2(rundis$elm_bootstrap$Bootstrap$Grid$Internal$Width, size, count));
 	});
-var rundis$elm_bootstrap$Bootstrap$Grid$Col$xs2 = A2(rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, rundis$elm_bootstrap$Bootstrap$General$Internal$XS, rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col2);
-var rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col5 = {$: 'Col5'};
-var rundis$elm_bootstrap$Bootstrap$Grid$Col$xs5 = A2(rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, rundis$elm_bootstrap$Bootstrap$General$Internal$XS, rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col5);
+var rundis$elm_bootstrap$Bootstrap$Grid$Col$xs3 = A2(rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, rundis$elm_bootstrap$Bootstrap$General$Internal$XS, rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col3);
+var rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4 = {$: 'Col4'};
+var rundis$elm_bootstrap$Bootstrap$Grid$Col$xs4 = A2(rundis$elm_bootstrap$Bootstrap$Grid$Internal$width, rundis$elm_bootstrap$Bootstrap$General$Internal$XS, rundis$elm_bootstrap$Bootstrap$Grid$Internal$Col4);
 var author$project$Main$view = function (model) {
 	var body = _List_fromArray(
 		[
@@ -7687,7 +8398,7 @@ var author$project$Main$view = function (model) {
 									A2(
 									rundis$elm_bootstrap$Bootstrap$Grid$col,
 									_List_fromArray(
-										[rundis$elm_bootstrap$Bootstrap$Grid$Col$xs2]),
+										[rundis$elm_bootstrap$Bootstrap$Grid$Col$xs3]),
 									_List_fromArray(
 										[
 											author$project$Main$viewLoanCalculus(model)
@@ -7695,18 +8406,18 @@ var author$project$Main$view = function (model) {
 									A2(
 									rundis$elm_bootstrap$Bootstrap$Grid$col,
 									_List_fromArray(
-										[rundis$elm_bootstrap$Bootstrap$Grid$Col$xs5]),
+										[rundis$elm_bootstrap$Bootstrap$Grid$Col$xs4]),
 									_List_fromArray(
 										[
-											author$project$Main$viewLandlord(model)
+											author$project$Main$viewSeller(model)
 										])),
 									A2(
 									rundis$elm_bootstrap$Bootstrap$Grid$col,
 									_List_fromArray(
-										[rundis$elm_bootstrap$Bootstrap$Grid$Col$xs5]),
+										[rundis$elm_bootstrap$Bootstrap$Grid$Col$xs4]),
 									_List_fromArray(
 										[
-											author$project$Main$viewTenant(model)
+											author$project$Main$viewBuyer(model)
 										]))
 								]))
 						]))
@@ -7821,7 +8532,6 @@ var elm$core$String$left = F2(
 	function (n, string) {
 		return (n < 1) ? '' : A3(elm$core$String$slice, 0, n, string);
 	});
-var elm$core$String$contains = _String_contains;
 var elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
 		return {fragment: fragment, host: host, path: path, port_: port_, protocol: protocol, query: query};
